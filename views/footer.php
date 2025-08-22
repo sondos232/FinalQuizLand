@@ -2,8 +2,8 @@
     <div class="container mx-auto lg:max-w-screen-xl md:max-w-screen-md px-4">
         <div class="grid grid-cols-1 gap-y-10 gap-x-16 sm:grid-cols-2 lg:grid-cols-12 xl:gap-x-8">
             <div class="col-span-4 md:col-span-12 lg:col-span-4">
-                <img src="../../assets/images/logo/logo.svg" width="150" alt="Logo" class="mb-10">
-                <div class="flex items-center gap-4">
+                <img src="../../assets/images/logo/logo.svg" width="150" alt="الشعار" class="mb-10 mx-auto">
+                <div class="flex items-center gap-4 justify-center">
                     <a href="#" class="hover:text-primary text-black text-3xl">
                         <svg class="w-[42px] h-[42px] fill-black" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                             width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
@@ -31,24 +31,24 @@
                 </div>
             </div>
 
-            <div class="col-span-2">
-                <h3 class="mb-4 text-2xl font-medium">Links</h3>
+            <div class="mr-6 md:mr-0 col-span-3 md:col-span-3 lg:col-span-2">
+                <h3 class="mb-4 text-2xl font-medium">روابط</h3>
                 <ul>
-                    <li class="mb-2 text-black/50 hover:text-primary w-fit"><a href="#">Home</a></li>
-                    <li class="mb-2 text-black/50 hover:text-primary w-fit"><a href="#">About</a></li>
-                    <li class="mb-2 text-black/50 hover:text-primary w-fit"><a href="#">Services</a></li>
-                    <li class="mb-2 text-black/50 hover:text-primary w-fit"><a href="#">Contact</a></li>
+                    <li class="mb-2 text-black/50 hover:text-primary w-fit"><a href="#">الرئيسية</a></li>
+                    <li class="mb-2 text-black/50 hover:text-primary w-fit"><a href="#">من نحن</a></li>
+                    <li class="mb-2 text-black/50 hover:text-primary w-fit"><a href="#">الخدمات</a></li>
+                    <li class="mb-2 text-black/50 hover:text-primary w-fit"><a href="#">اتصل بنا</a></li>
                 </ul>
             </div>
 
-            <div class="col-span-2">
-                <h3 class="mb-4 text-2xl font-medium">Other</h3>
+            <div class="md:col-span-3 lg:col-span-2">
+                <h3 class="mb-4 text-2xl font-medium">أخرى</h3>
                 <ul>
-                    <li class="mb-2 text-black/50 hover:text-primary w-fit"><a href="#">About Us</a></li>
-                    <li class="mb-2 text-black/50 hover:text-primary w-fit"><a href="#">Our Team</a></li>
-                    <li class="mb-2 text-black/50 hover:text-primary w-fit"><a href="#">Careers</a></li>
-                    <li class="mb-2 text-black/50 hover:text-primary w-fit"><a href="#">Services</a></li>
-                    <li class="mb-2 text-black/50 hover:text-primary w-fit"><a href="#">Contact</a></li>
+                    <li class="mb-2 text-black/50 hover:text-primary w-fit"><a href="#">من نحن</a></li>
+                    <li class="mb-2 text-black/50 hover:text-primary w-fit"><a href="#">فريقنا</a></li>
+                    <li class="mb-2 text-black/50 hover:text-primary w-fit"><a href="#">الوظائف</a></li>
+                    <li class="mb-2 text-black/50 hover:text-primary w-fit"><a href="#">الخدمات</a></li>
+                    <li class="mb-2 text-black/50 hover:text-primary w-fit"><a href="#">اتصل بنا</a></li>
                 </ul>
             </div>
 
@@ -61,21 +61,19 @@
                             clip-rule="evenodd" />
                     </svg>
 
-                    <h5 class="text-lg text-black/60">925 Filbert Street Pennsylvania 18072</h5>
+                    <h5 class="text-lg text-black/60">925 شارع فيلبرت، بنسلفانيا 18072</h5>
                 </div>
                 <div class="flex gap-2 mt-10">
-                    <svg class="w-[42px] h-[42px] fill-blue-700" aria-hidden="true"
-                        xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
-                        viewBox="0 0 24 24">
+                    <svg class="w-[42px] h-[42px] fill-blue-700" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                        width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
                         <path
                             d="M7.978 4a2.553 2.553 0 0 0-1.926.877C4.233 6.7 3.699 8.751 4.153 10.814c.44 1.995 1.778 3.893 3.456 5.572 1.68 1.679 3.577 3.018 5.57 3.459 2.062.456 4.115-.073 5.94-1.885a2.556 2.556 0 0 0 .001-3.861l-1.21-1.21a2.689 2.689 0 0 0-3.802 0l-.617.618a.806.806 0 0 1-1.14 0l-1.854-1.855a.807.807 0 0 1 0-1.14l.618-.62a2.692 2.692 0 0 0 0-3.803l-1.21-1.211A2.555 2.555 0 0 0 7.978 4Z" />
                     </svg>
                     <h5 class="text-lg text-black/60">+45 3411-4411</h5>
                 </div>
                 <div class="flex gap-2 mt-10">
-                    <svg class="w-[42px] h-[42px] fill-blue-700" aria-hidden="true"
-                        xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
-                        viewBox="0 0 24 24">
+                    <svg class="w-[42px] h-[42px] fill-blue-700" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                        width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
                         <path fill-rule="evenodd"
                             d="M3 6a2 2 0 0 1 2-2h5.532a2 2 0 0 1 1.536.72l1.9 2.28H3V6Zm0 3v10a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V9H3Z"
                             clip-rule="evenodd" />
@@ -92,8 +90,8 @@
                     GetNextJsTemplates.com</a>
             </h4>
             <div class="flex gap-5 mt-5 lg:mt-0 justify-center lg:justify-start">
-                <a href="/" class="text-black/50 text-sm font-normal hover:text-primary">Privacy policy</a>
-                <a href="/" class="text-black/50 text-sm font-normal hover:text-primary">Terms & conditions</a>
+                <a href="/" class="text-black/50 text-sm font-normal hover:text-primary">سياسة الخصوصية</a>
+                <a href="/" class="text-black/50 text-sm font-normal hover:text-primary">الشروط والأحكام</a>
             </div>
             <h4 class="text-black/50 text-sm text-center lg:text-start font-normal">
                 Distributed by <a href="https://themewagon.com/" target="_blank" class="hover:text-primary">

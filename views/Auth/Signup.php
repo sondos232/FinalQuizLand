@@ -29,13 +29,14 @@
     <div class="flex flex-col items-center justify-center min-h-screen py-12 px-4 sm:px-6 lg:px-8">
 
         <!-- Logo Section -->
-        <div class="text-center">
+        <div class="text-center mb-14">
             <!-- Logo (Replace with your logo) -->
             <img src="../../assets/images/logo/logo.svg" width="250" alt="Logo">
         </div>
 
         <!-- Sign Up Form -->
-        <form class="w-full max-w-sm mx-auto" action="signup.php" method="POST" autocomplete="off">
+        <form class="w-full max-w-sm mx-auto" id="signupForm" action="signup_handler.php" method="POST"
+            autocomplete="off">
             <!-- Username Input -->
             <div class="mb-6">
                 <input type="text" name="username" placeholder="Username"
@@ -130,6 +131,7 @@
             const password = document.querySelector('input[name="password"]');
             const confirmPassword = document.querySelector('input[name="confirm_password"]');
 
+            // Client-side check if password and confirm password match
             if (password.value !== confirmPassword.value) {
                 event.preventDefault();
                 alert('Passwords do not match!');

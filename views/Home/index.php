@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 
 <head>
     <meta charset="UTF-8">
@@ -14,7 +14,7 @@
     <?php include '../header.php'; ?>
 
     <section id="home-section" class="bg-slate-200 mt-16">
-        <div class="container mx-auto lg:max-w-screen-xl md:max-w-screen-md px-4 pt-20">
+        <div class="container mx-auto lg:max-w-screen-xl md:max-w-screen-md px-4 pt-20 pb-14">
             <div class="grid grid-cols-1 lg:grid-cols-12 space-x-1 items-center">
                 <div class="col-span-6 flex flex-col gap-8">
                     <div class="flex gap-2 mx-auto items-center lg:mx-0">
@@ -26,41 +26,41 @@
                                 clip-rule="evenodd" />
                         </svg>
 
-                        <p class="text-green-500 text-sm font-semibold text-center lg:text-start">Get 30% off on first
-                            enroll</p>
+                        <p class="text-green-500 text-sm font-semibold text-center lg:text-start">احصل على خصم 30% عند
+                            التسجيل الأول في اختباراتنا</p>
                     </div>
-                    <h1 class="text-gray-900 text-4xl sm:text-5xl font-semibold pt-5 lg:pt-0">Advance your engineering
-                        skills with us.</h1>
-                    <h3 class="text-gray-700 text-lg pt-5 lg:pt-0">Build skills with our courses and mentor from
-                        world-class companies.</h3>
+                    <h1 class="text-gray-900 text-4xl sm:text-5xl font-semibold pt-5 lg:pt-0">اختبر مهاراتك الثقافية
+                        معنا.</h1>
+                    <h3 class="text-gray-700 text-lg pt-5 lg:pt-0">ابدأ رحلتك في تعلم أشياء جديدة من خلال اختباراتنا
+                        المتنوعة في جميع المجالات.</h3>
                     <div class="relative rounded-full pt-5 lg:pt-0">
                         <input type="email" name="q"
                             class="py-6 lg:py-8 pl-8 pr-20 text-lg w-full text-black rounded-full focus:outline-none shadow-xl  shadow-purple-100/90"
-                            placeholder="search courses..." autocomplete="off" />
-                        <button class="bg-blue-500 p-5 rounded-full absolute right-2 top-2">
-                            <svg class="w-[38px] h-[38px] text-gray-800 dark:text-white" aria-hidden="true"
-                                xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
+                            placeholder="ابحث عن اختبارات ثقافة عامة..." autocomplete="off" />
+                        <button class="bg-blue-500 p-5 rounded-full absolute left-2 top-7 lg:top-2">
+                            <svg class="w-[22px] lg:w-[38px] h-[22px] lg:h-[38px] text-gray-800 dark:text-white"
+                                aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
                                 viewBox="0 0 24 24">
                                 <path stroke="currentColor" stroke-linecap="round" stroke-width="2.3"
                                     d="m21 21-3.5-3.5M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z" />
                             </svg>
                         </button>
                     </div>
-                    <div class="flex items-center justify-between pt-10 lg:pt-4">
+                    <div class="flex items-center justify-around pt-10 lg:pt-4">
                         <div class="flex gap-2">
                             <img src="../../assets/images/banner/check-circle.svg" alt="check-image" width="30"
                                 height="30" class="smallImage" />
-                            <p class="text-sm sm:text-lg font-normal text-black">Flexible</p>
+                            <p class="text-sm sm:text-lg font-normal text-black">مرن</p>
                         </div>
                         <div class="flex gap-2">
                             <img src="../../assets/images/banner/check-circle.svg" alt="check-image" width="30"
                                 height="30" class="smallImage" />
-                            <p class="text-sm sm:text-lg font-normal text-black">Learning path</p>
+                            <p class="text-sm sm:text-lg font-normal text-black">مسار تعليمي متكامل</p>
                         </div>
                         <div class="flex gap-2">
                             <img src="../../assets/images/banner/check-circle.svg" alt="check-image" width="30"
                                 height="30" class="smallImage" />
-                            <p class="text-sm sm:text-lg font-normal text-black">Community</p>
+                            <p class="text-sm sm:text-lg font-normal text-black">مجتمع داعم</p>
                         </div>
                     </div>
 
@@ -72,6 +72,7 @@
 
         </div>
     </section>
+
 
 
     <section id="courses" class="mt-14">
@@ -516,107 +517,111 @@
         </div>
     </section>
 
-    <section class="bg-blue-100 py-16" id="mentor">
-        <div class="container mx-auto lg:max-w-screen-xl md:max-w-screen-md px-4 relative">
-            <h2 class="text-midnight_text text-5xl font-semibold">Meet with our <br /> mentor.</h2>
+<section class="bg-blue-100 py-16" id="mentor">
+    <div class="container mx-auto lg:max-w-screen-xl md:max-w-screen-md px-4 relative">
+        <h2 class="text-midnight_text text-5xl font-semibold">تعرف على مرشدينا.</h2>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-10">
-                <div class="m-3 py-14 text-center">
-                    <div class="relative">
-                        <img src="../../assets/images/mentor/user1.png" alt="user-image" width="306"
-                            class="inline-block m-auto" />
-                        <div class="absolute right-[84px] bottom-[102px] bg-white rounded-full p-2">
-                            <svg class="w-[35px] h-[35px] fill-blue-400" aria-hidden="true"
-                                xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
-                                viewBox="0 0 24 24">
-                                <path fill-rule="evenodd"
-                                    d="M12.51 8.796v1.697a3.738 3.738 0 0 1 3.288-1.684c3.455 0 4.202 2.16 4.202 4.97V19.5h-3.2v-5.072c0-1.21-.244-2.766-2.128-2.766-1.827 0-2.139 1.317-2.139 2.676V19.5h-3.19V8.796h3.168ZM7.2 6.106a1.61 1.61 0 0 1-.988 1.483 1.595 1.595 0 0 1-1.743-.348A1.607 1.607 0 0 1 5.6 4.5a1.601 1.601 0 0 1 1.6 1.606Z"
-                                    clip-rule="evenodd" />
-                                <path d="M7.2 8.809H4V19.5h3.2V8.809Z" />
-                            </svg>
-                        </div>
-                    </div>
-                    <div class="-mt-10">
-                        <h3 class="text-2xl font-semibold text-lightblack">Mentor Name</h3>
-                        <h4 class="text-lg font-normal text-lightblack pt-2 opacity-50">Mentor Profession</h4>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-10">
+            <!-- Mentor 1 -->
+            <div class="m-3 py-14 text-center">
+                <div class="relative">
+                    <img src="../../assets/images/mentor/user1.png" alt="صورة المستخدم" width="306"
+                        class="inline-block m-auto" />
+                    <div class="absolute right-[84px] bottom-[102px] bg-white rounded-full p-2">
+                        <svg class="w-[35px] h-[35px] fill-blue-400" aria-hidden="true"
+                            xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                            viewBox="0 0 24 24">
+                            <path fill-rule="evenodd"
+                                d="M12.51 8.796v1.697a3.738 3.738 0 0 1 3.288-1.684c3.455 0 4.202 2.16 4.202 4.97V19.5h-3.2v-5.072c0-1.21-.244-2.766-2.128-2.766-1.827 0-2.139 1.317-2.139 2.676V19.5h-3.19V8.796h3.168ZM7.2 6.106a1.61 1.61 0 0 1-.988 1.483 1.595 1.595 0 0 1-1.743-.348A1.607 1.607 0 0 1 5.6 4.5a1.601 1.601 0 0 1 1.6 1.606Z"
+                                clip-rule="evenodd" />
+                            <path d="M7.2 8.809H4V19.5h3.2V8.809Z" />
+                        </svg>
                     </div>
                 </div>
+                <div class="-mt-10">
+                    <h3 class="text-2xl font-semibold text-lightblack">أحمد السيد</h3>
+                    <h4 class="text-lg font-normal text-lightblack pt-2 opacity-50">مهندس برمجيات</h4>
+                </div>
+            </div>
 
-                <div class="m-3 py-14 text-center">
-                    <div class="relative">
-                        <img src="../../assets/images/mentor/user2.png" alt="user-image" width="306"
-                            class="inline-block m-auto" />
-                        <div class="absolute right-[84px] bottom-[102px] bg-white rounded-full p-2">
-                            <svg class="w-[35px] h-[35px] fill-blue-400" aria-hidden="true"
-                                xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
-                                viewBox="0 0 24 24">
-                                <path fill-rule="evenodd"
-                                    d="M12.51 8.796v1.697a3.738 3.738 0 0 1 3.288-1.684c3.455 0 4.202 2.16 4.202 4.97V19.5h-3.2v-5.072c0-1.21-.244-2.766-2.128-2.766-1.827 0-2.139 1.317-2.139 2.676V19.5h-3.19V8.796h3.168ZM7.2 6.106a1.61 1.61 0 0 1-.988 1.483 1.595 1.595 0 0 1-1.743-.348A1.607 1.607 0 0 1 5.6 4.5a1.601 1.601 0 0 1 1.6 1.606Z"
-                                    clip-rule="evenodd" />
-                                <path d="M7.2 8.809H4V19.5h3.2V8.809Z" />
-                            </svg>
-                        </div>
-                    </div>
-                    <div class="-mt-10">
-                        <h3 class="text-2xl font-semibold text-lightblack">Mentor Name</h3>
-                        <h4 class="text-lg font-normal text-lightblack pt-2 opacity-50">Mentor Profession</h4>
+            <!-- Mentor 2 -->
+            <div class="m-3 py-14 text-center">
+                <div class="relative">
+                    <img src="../../assets/images/mentor/user2.png" alt="صورة المستخدم" width="306"
+                        class="inline-block m-auto" />
+                    <div class="absolute right-[84px] bottom-[102px] bg-white rounded-full p-2">
+                        <svg class="w-[35px] h-[35px] fill-blue-400" aria-hidden="true"
+                            xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                            viewBox="0 0 24 24">
+                            <path fill-rule="evenodd"
+                                d="M12.51 8.796v1.697a3.738 3.738 0 0 1 3.288-1.684c3.455 0 4.202 2.16 4.202 4.97V19.5h-3.2v-5.072c0-1.21-.244-2.766-2.128-2.766-1.827 0-2.139 1.317-2.139 2.676V19.5h-3.19V8.796h3.168ZM7.2 6.106a1.61 1.61 0 0 1-.988 1.483 1.595 1.595 0 0 1-1.743-.348A1.607 1.607 0 0 1 5.6 4.5a1.601 1.601 0 0 1 1.6 1.606Z"
+                                clip-rule="evenodd" />
+                            <path d="M7.2 8.809H4V19.5h3.2V8.809Z" />
+                        </svg>
                     </div>
                 </div>
+                <div class="-mt-10">
+                    <h3 class="text-2xl font-semibold text-lightblack">سارة محمود</h3>
+                    <h4 class="text-lg font-normal text-lightblack pt-2 opacity-50">عالمة بيانات</h4>
+                </div>
+            </div>
 
-                <div class="m-3 py-14 text-center">
-                    <div class="relative">
-                        <img src="../../assets/images/mentor/user3.png" alt="user-image" width="306"
-                            class="inline-block m-auto" />
-                        <div class="absolute right-[84px] bottom-[102px] bg-white rounded-full p-2">
-                            <svg class="w-[35px] h-[35px] fill-blue-400" aria-hidden="true"
-                                xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
-                                viewBox="0 0 24 24">
-                                <path fill-rule="evenodd"
-                                    d="M12.51 8.796v1.697a3.738 3.738 0 0 1 3.288-1.684c3.455 0 4.202 2.16 4.202 4.97V19.5h-3.2v-5.072c0-1.21-.244-2.766-2.128-2.766-1.827 0-2.139 1.317-2.139 2.676V19.5h-3.19V8.796h3.168ZM7.2 6.106a1.61 1.61 0 0 1-.988 1.483 1.595 1.595 0 0 1-1.743-.348A1.607 1.607 0 0 1 5.6 4.5a1.601 1.601 0 0 1 1.6 1.606Z"
-                                    clip-rule="evenodd" />
-                                <path d="M7.2 8.809H4V19.5h3.2V8.809Z" />
-                            </svg>
-                        </div>
+            <!-- Mentor 3 -->
+            <div class="m-3 py-14 text-center">
+                <div class="relative">
+                    <img src="../../assets/images/mentor/user3.png" alt="صورة المستخدم" width="306"
+                        class="inline-block m-auto" />
+                    <div class="absolute right-[84px] bottom-[102px] bg-white rounded-full p-2">
+                        <svg class="w-[35px] h-[35px] fill-blue-400" aria-hidden="true"
+                            xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                            viewBox="0 0 24 24">
+                            <path fill-rule="evenodd"
+                                d="M12.51 8.796v1.697a3.738 3.738 0 0 1 3.288-1.684c3.455 0 4.202 2.16 4.202 4.97V19.5h-3.2v-5.072c0-1.21-.244-2.766-2.128-2.766-1.827 0-2.139 1.317-2.139 2.676V19.5h-3.19V8.796h3.168ZM7.2 6.106a1.61 1.61 0 0 1-.988 1.483 1.595 1.595 0 0 1-1.743-.348A1.607 1.607 0 0 1 5.6 4.5a1.601 1.601 0 0 1 1.6 1.606Z"
+                                clip-rule="evenodd" />
+                            <path d="M7.2 8.809H4V19.5h3.2V8.809Z" />
+                        </svg>
                     </div>
-                    <div class="-mt-10">
-                        <h3 class="text-2xl font-semibold text-lightblack">Mentor Name</h3>
-                        <h4 class="text-lg font-normal text-lightblack pt-2 opacity-50">Mentor Profession</h4>
-                    </div>
+                </div>
+                <div class="-mt-10">
+                    <h3 class="text-2xl font-semibold text-lightblack">علي حسن</h3>
+                    <h4 class="text-lg font-normal text-lightblack pt-2 opacity-50">مدير منتج</h4>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <section class="py-16">
-        <div class="container mx-auto lg:max-w-screen-xl md:max-w-screen-md px-4">
-            <div class="grid grid-cols-1 gap-y-10 gap-x-6 md:grid-cols-12 xl:gap-x-8">
-                <div class="col-span-12 bg-newsletter-bg-2 bg-contain bg-no-repeat" style="background-image: url('../../assets/images/newsletter/bgFile.png');">
-                    <div class="mb-10 mt-24 lg:mx-64 lg:my-24">
-                        <h3 class="text-4xl md:text-5xl text-center font-semibold text-white mb-3">Newsletter.</h3>
-                        <h3 class="text-base font-normal text-white/75 text-center mb-8">
-                            Subscribe to our newsletter for discounts, <br /> promo and many more.
-                        </h3>
-                        <div>
-                            <div
-                                class="relative text-white focus-within:text-white flex flex-row-reverse rounded-full pt-5 lg:pt-0">
-                                <input type="email" name="q"
-                                    class="py-6 lg:py-8 text-sm md:text-lg w-full mx-3 text-black rounded-full pl-8 focus:outline-none focus:text-black"
-                                    placeholder="Enter your email address" autocomplete="off" />
-                                <div class="absolute inset-y-0 right-0 flex items-center pr-6 pt-5 lg:pt-0">
-                                    <button type="submit"
-                                        class="p-3 lg:p-5 focus:outline-none focus:shadow-outline bg-ultramarine hover:bg-midnightblue duration-150 ease-in-out rounded-full">
-                                        <img src="../../assets/images/newsletter/send.svg" alt="send-icon" width="30" height="30" />
-                                    </button>
-                                </div>
+<section class="py-16">
+    <div class="container mx-auto lg:max-w-screen-xl md:max-w-screen-md px-4">
+        <div class="grid grid-cols-1 gap-y-10 gap-x-6 md:grid-cols-12 xl:gap-x-8">
+            <div class="col-span-12 bg-newsletter-bg-2 bg-contain bg-no-repeat bg-cover lg:bg-contain"
+                style="background-image: url('../../assets/images/newsletter/bgFile.png'); ">
+                <div class="mb-10 mt-24 lg:mx-64 lg:my-24">
+                    <h3 class="text-4xl md:text-5xl text-center font-semibold text-white mb-3">النشرة الإخبارية.</h3>
+                    <h3 class="text-base font-normal text-white/75 text-center mb-8">
+                        اشترك في نشرتنا الإخبارية للحصول على خصومات، <br /> عروض ترويجية والكثير غيرها.
+                    </h3>
+                    <div>
+                        <div class="relative text-white focus-within:text-white flex flex-row-reverse rounded-full pt-5 lg:pt-0">
+                            <input type="email" name="q"
+                                class="py-6 px-4 lg:py-8 text-sm md:text-lg w-full mx-3 text-black rounded-full pl-8 focus:outline-none focus:text-black"
+                                placeholder="أدخل عنوان بريدك الإلكتروني" autocomplete="off" />
+                            <div class="absolute inset-y-0 left-5 flex items-center pr-6 pt-5 lg:pt-0">
+                                <button type="submit"
+                                    class="p-3 lg:p-5 focus:outline-none bg-gray-200 focus:shadow-outline bg-ultramarine hover:bg-midnightblue duration-150 ease-in-out rounded-full">
+                                    <img src="../../assets/images/newsletter/send.svg" alt="send-icon" width="30"
+                                        height="30" />
+                                </button>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <?php include '../footer.php';?>
+    <?php include '../footer.php'; ?>
 
 
     <script src="https://unpkg.com/swiper@6.8.4/swiper-bundle.min.js"></script>
@@ -631,6 +636,10 @@
                 disableOnInteraction: false,
             },
             breakpoints: {
+                0: {
+                    slidesPerView: 1,
+                    spaceBetween: 20,
+                },
                 640: {
                     slidesPerView: 1,
                     spaceBetween: 20,
