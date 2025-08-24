@@ -1,3 +1,15 @@
+<?php
+include("../../config/db.php");
+
+$query = "SELECT id, title, category, created_at FROM quizzes";
+$result = $conn->query($query);
+$quizzes = [];
+
+while ($row = $result->fetch_assoc()) {
+    $quizzes[] = $row;
+}
+?>
+
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 
@@ -73,441 +85,184 @@
         </div>
     </section>
 
-
-
     <section id="courses" class="mt-14">
         <div class="container mx-auto lg:max-w-screen-xl md:max-w-screen-md px-4">
             <div class="sm:flex justify-between items-center mb-20">
-                <h2 class="text-midnight_text text-4xl lg:text-5xl font-semibold mb-5 sm:mb-0">Popular courses.</h2>
-                <a href="/" class="text-primary text-lg font-medium hover:tracking-widest duration-500">Explore
-                    courses&nbsp;&gt;&nbsp;</a>
+                <h2 class="text-midnight_text text-4xl lg:text-5xl font-semibold mb-5 sm:mb-0">الدورات الشعبية</h2>
+                <a href="/" class="text-primary text-lg font-medium hover:tracking-widest duration-500">استكشاف
+                    الدورات&nbsp;&gt;&nbsp;</a>
             </div>
 
             <div class="swiper-container">
                 <div class="swiper-wrapper">
-                    <div class="swiper-slide">
-                        <div class="slick-slider">
-                            <div class="course-item shadow-2xl rounded-2xl">
-                                <div class="bg-white m-3 mb-12 px-3 pt-3 pb-12 shadow-course-shadow rounded-2xl h-full">
-                                    <div class="relative rounded-3xl">
-                                        <img src="../../assets/images/courses/courseone.png" alt="course-image"
-                                            width="389" height="262" class="m-auto clipPath">
-                                        <div class="absolute right-5 -bottom-2 bg-secondary rounded-full p-6">
-                                            <h3 class="text-white uppercase text-center text-sm font-medium">best <br />
-                                                seller</h3>
-                                        </div>
-                                    </div>
-
-                                    <div class="px-3 pt-6">
-                                        <a href="#" class="text-2xl font-bold text-black max-w-75% inline-block">Course
-                                            Title</a>
-                                        <h3 class="text-base font-normal pt-6 text-black/75">Instructor Name</h3>
-                                        <div class="flex justify-between items-center py-6 border-b">
-                                            <div class="flex items-center gap-4">
-                                                <h3 class="text-red-700 text-2xl font-medium">4.5</h3>
-                                                <div class="flex">
-                                                    <svg class="w-[33px] h-[33px] fill-yellow-600" aria-hidden="true"
-                                                        xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                        fill="currentColor" viewBox="0 0 24 24">
-                                                        <path
-                                                            d="M13.849 4.22c-.684-1.626-3.014-1.626-3.698 0L8.397 8.387l-4.552.361c-1.775.14-2.495 2.331-1.142 3.477l3.468 2.937-1.06 4.392c-.413 1.713 1.472 3.067 2.992 2.149L12 19.35l3.897 2.354c1.52.918 3.405-.436 2.992-2.15l-1.06-4.39 3.468-2.938c1.353-1.146.633-3.336-1.142-3.477l-4.552-.36-1.754-4.17Z" />
-                                                    </svg>
-                                                    <svg class="w-[33px] h-[33px] fill-yellow-600" aria-hidden="true"
-                                                        xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                        fill="currentColor" viewBox="0 0 24 24">
-                                                        <path
-                                                            d="M13.849 4.22c-.684-1.626-3.014-1.626-3.698 0L8.397 8.387l-4.552.361c-1.775.14-2.495 2.331-1.142 3.477l3.468 2.937-1.06 4.392c-.413 1.713 1.472 3.067 2.992 2.149L12 19.35l3.897 2.354c1.52.918 3.405-.436 2.992-2.15l-1.06-4.39 3.468-2.938c1.353-1.146.633-3.336-1.142-3.477l-4.552-.36-1.754-4.17Z" />
-                                                    </svg>
-                                                    <svg class="w-[33px] h-[33px] fill-yellow-600" aria-hidden="true"
-                                                        xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                        fill="currentColor" viewBox="0 0 24 24">
-                                                        <path
-                                                            d="M13.849 4.22c-.684-1.626-3.014-1.626-3.698 0L8.397 8.387l-4.552.361c-1.775.14-2.495 2.331-1.142 3.477l3.468 2.937-1.06 4.392c-.413 1.713 1.472 3.067 2.992 2.149L12 19.35l3.897 2.354c1.52.918 3.405-.436 2.992-2.15l-1.06-4.39 3.468-2.938c1.353-1.146.633-3.336-1.142-3.477l-4.552-.36-1.754-4.17Z" />
-                                                    </svg>
-                                                    <svg class="w-[33px] h-[33px] fill-yellow-600" aria-hidden="true"
-                                                        xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                        fill="currentColor" viewBox="0 0 24 24">
-                                                        <path
-                                                            d="M13.849 4.22c-.684-1.626-3.014-1.626-3.698 0L8.397 8.387l-4.552.361c-1.775.14-2.495 2.331-1.142 3.477l3.468 2.937-1.06 4.392c-.413 1.713 1.472 3.067 2.992 2.149L12 19.35l3.897 2.354c1.52.918 3.405-.436 2.992-2.15l-1.06-4.39 3.468-2.938c1.353-1.146.633-3.336-1.142-3.477l-4.552-.36-1.754-4.17Z" />
-                                                    </svg>
-                                                    <svg class="w-[33px] h-[33px] fill-yellow-600" aria-hidden="true"
-                                                        xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                        fill="currentColor" viewBox="0 0 24 24">
-                                                        <path
-                                                            d="M13.849 4.22c-.684-1.626-3.014-1.626-3.698 0L8.397 8.387l-4.552.361c-1.775.14-2.495 2.331-1.142 3.477l3.468 2.937-1.06 4.392c-.413 1.713 1.472 3.067 2.992 2.149L12 19.35l3.897 2.354c1.52.918 3.405-.436 2.992-2.15l-1.06-4.39 3.468-2.938c1.353-1.146.633-3.336-1.142-3.477l-4.552-.36-1.754-4.17Z" />
-                                                    </svg>
-                                                </div>
-                                            </div>
-                                            <h3 class="text-3xl font-medium">$99</h3>
-                                        </div>
-                                        <div class="flex justify-between pt-6">
-                                            <div class="flex gap-4">
-                                                <svg class="w-[33px] h-[33px] fill-blue-300" aria-hidden="true"
-                                                    xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                    fill="none" viewBox="0 0 24 24">
-                                                    <path stroke="currentColor" stroke-linecap="round"
-                                                        stroke-linejoin="round" stroke-width="1.1"
-                                                        d="M12 6.03v13m0-13c-2.819-.831-4.715-1.076-8.029-1.023A.99.99 0 0 0 3 6v11c0 .563.466 1.014 1.03 1.007 3.122-.043 5.018.212 7.97 1.023m0-13c2.819-.831 4.715-1.076 8.029-1.023A.99.99 0 0 1 21 6v11c0 .563-.466 1.014-1.03 1.007-3.122-.043-5.018.212-7.97 1.023" />
-                                                </svg>
-
-                                                <h3 class="text-base font-medium text-black opacity-75">12 classes</h3>
-                                            </div>
-                                            <div class="flex gap-4">
-                                                <svg class="w-[33px] h-[33px] fill-blue-300" aria-hidden="true"
-                                                    xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                    fill="currentColor" viewBox="0 0 24 24">
-                                                    <path fill-rule="evenodd"
-                                                        d="M12 4a4 4 0 1 0 0 8 4 4 0 0 0 0-8Zm-2 9a4 4 0 0 0-4 4v1a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-1a4 4 0 0 0-4-4h-4Z"
-                                                        clip-rule="evenodd" />
-                                                </svg>
-
-                                                <h3 class="text-base font-medium text-black opacity-75">150 students
+                    <?php foreach ($quizzes as $quiz): ?>
+                        <div class="swiper-slide">
+                            <div class="slick-slider">
+                                <div class="course-item shadow-2xl rounded-2xl">
+                                    <div class="bg-white m-3 mb-12 px-3 pt-3 pb-12 shadow-course-shadow rounded-2xl h-full">
+                                        <div class="relative rounded-3xl">
+                                            <img src="../../assets/images/courses/courseone.png" alt="course-image"
+                                                width="389" height="262" class="m-auto clipPath">
+                                            <div class="absolute right-5 -bottom-2 bg-secondary rounded-full p-6">
+                                                <h3 class="text-white uppercase text-center text-sm font-medium">الأفضل
+                                                    مبيعًا
                                                 </h3>
+                                            </div>
+                                        </div>
+
+                                        <div class="px-3 pt-6">
+                                            <a href="quiz-details.php?quiz_id=<?= $quiz['id'] ?>"
+                                                class="text-2xl font-bold text-black max-w-75% inline-block"><?= $quiz['title'] ? $quiz['title'] : 'عنوان الدورة' ?></a>
+
+                                            <h3 class="text-base font-normal pt-6 text-black/75">
+                                                <?= $quiz['category'] ? $quiz['category'] : 'الفئة' ?>
+                                            </h3>
+                                            <div class="flex justify-between items-center py-6 border-b">
+                                                <div class="flex items-center gap-4">
+                                                    <h3 class="text-red-700 text-2xl font-medium">4.5</h3>
+                                                    <div class="flex">
+                                                        <?php for ($i = 0; $i < 5; $i++): ?>
+                                                            <svg class="w-[33px] h-[33px] fill-yellow-600" aria-hidden="true"
+                                                                xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                                fill="currentColor" viewBox="0 0 24 24">
+                                                                <path
+                                                                    d="M13.849 4.22c-.684-1.626-3.014-1.626-3.698 0L8.397 8.387l-4.552.361c-1.775.14-2.495 2.331-1.142 3.477l3.468 2.937-1.06 4.392c-.413 1.713 1.472 3.067 2.992 2.149L12 19.35l3.897 2.354c1.52.918 3.405-.436 2.992-2.15l-1.06-4.39 3.468-2.938c1.353-1.146.633-3.336-1.142-3.477l-4.552-.36-1.754-4.17Z" />
+                                                            </svg>
+                                                        <?php endfor; ?>
+                                                    </div>
+                                                </div>
+                                                <h3 class="text-3xl font-medium">$99</h3>
+                                            </div>
+                                            <div class="flex justify-between pt-6">
+                                                <div class="flex gap-4">
+                                                    <svg class="w-[33px] h-[33px] fill-blue-300" aria-hidden="true"
+                                                        xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                        fill="none" viewBox="0 0 24 24">
+                                                        <path stroke="currentColor" stroke-linecap="round"
+                                                            stroke-linejoin="round" stroke-width="1.1"
+                                                            d="M12 6.03v13m0-13c-2.819-.831-4.715-1.076-8.029-1.023A.99.99 0 0 0 3 6v11c0 .563.466 1.014 1.03 1.007 3.122-.043 5.018.212 7.97 1.023m0-13c2.819-.831 4.715-1.076 8.029-1.023A.99.99 0 0 1 21 6v11c0 .563-.466 1.014-1.03 1.007-3.122-.043-5.018.212-7.97 1.023" />
+                                                    </svg>
+                                                    <h3 class="text-base font-medium text-black opacity-75">12 درسًا</h3>
+                                                </div>
+                                                <div class="flex gap-4">
+                                                    <svg class="w-[33px] h-[33px] fill-blue-300" aria-hidden="true"
+                                                        xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                        fill="currentColor" viewBox="0 0 24 24">
+                                                        <path fill-rule="evenodd"
+                                                            d="M12 4a4 4 0 1 0 0 8 4 4 0 0 0 0-8Zm-2 9a4 4 0 0 0-4 4v1a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-1a4 4 0 0 0-4-4h-4Z"
+                                                            clip-rule="evenodd" />
+                                                    </svg>
+                                                    <h3 class="text-base font-medium text-black opacity-75">150 طالبًا</h3>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    <?php endforeach; ?>
+                </div>
+            </div>
+        </div>
+    </section>
 
-                    <div class="swiper-slide">
-                        <div class="slick-slider">
-                            <div class="course-item shadow-2xl rounded-2xl">
-                                <div class="bg-white m-3 mb-12 px-3 pt-3 pb-12 shadow-course-shadow rounded-2xl h-full">
-                                    <div class="relative rounded-3xl">
-                                        <img src="../../assets/images/courses/courseone.png" alt="course-image"
-                                            width="389" height="262" class="m-auto clipPath">
-                                        <div class="absolute right-5 -bottom-2 bg-secondary rounded-full p-6">
-                                            <h3 class="text-white uppercase text-center text-sm font-medium">best <br />
-                                                seller</h3>
-                                        </div>
-                                    </div>
+    <section class="bg-blue-100 py-16" id="mentor">
+        <div class="container mx-auto lg:max-w-screen-xl md:max-w-screen-md px-4 relative">
+            <h2 class="text-midnight_text text-5xl font-semibold">تعرف على مرشدينا.</h2>
 
-                                    <div class="px-3 pt-6">
-                                        <a href="#" class="text-2xl font-bold text-black max-w-75% inline-block">Course
-                                            Title</a>
-                                        <h3 class="text-base font-normal pt-6 text-black/75">Instructor Name</h3>
-                                        <div class="flex justify-between items-center py-6 border-b">
-                                            <div class="flex items-center gap-4">
-                                                <h3 class="text-red-700 text-2xl font-medium">4.5</h3>
-                                                <div class="flex">
-                                                    <svg class="w-[33px] h-[33px] fill-yellow-600" aria-hidden="true"
-                                                        xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                        fill="currentColor" viewBox="0 0 24 24">
-                                                        <path
-                                                            d="M13.849 4.22c-.684-1.626-3.014-1.626-3.698 0L8.397 8.387l-4.552.361c-1.775.14-2.495 2.331-1.142 3.477l3.468 2.937-1.06 4.392c-.413 1.713 1.472 3.067 2.992 2.149L12 19.35l3.897 2.354c1.52.918 3.405-.436 2.992-2.15l-1.06-4.39 3.468-2.938c1.353-1.146.633-3.336-1.142-3.477l-4.552-.36-1.754-4.17Z" />
-                                                    </svg>
-                                                    <svg class="w-[33px] h-[33px] fill-yellow-600" aria-hidden="true"
-                                                        xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                        fill="currentColor" viewBox="0 0 24 24">
-                                                        <path
-                                                            d="M13.849 4.22c-.684-1.626-3.014-1.626-3.698 0L8.397 8.387l-4.552.361c-1.775.14-2.495 2.331-1.142 3.477l3.468 2.937-1.06 4.392c-.413 1.713 1.472 3.067 2.992 2.149L12 19.35l3.897 2.354c1.52.918 3.405-.436 2.992-2.15l-1.06-4.39 3.468-2.938c1.353-1.146.633-3.336-1.142-3.477l-4.552-.36-1.754-4.17Z" />
-                                                    </svg>
-                                                    <svg class="w-[33px] h-[33px] fill-yellow-600" aria-hidden="true"
-                                                        xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                        fill="currentColor" viewBox="0 0 24 24">
-                                                        <path
-                                                            d="M13.849 4.22c-.684-1.626-3.014-1.626-3.698 0L8.397 8.387l-4.552.361c-1.775.14-2.495 2.331-1.142 3.477l3.468 2.937-1.06 4.392c-.413 1.713 1.472 3.067 2.992 2.149L12 19.35l3.897 2.354c1.52.918 3.405-.436 2.992-2.15l-1.06-4.39 3.468-2.938c1.353-1.146.633-3.336-1.142-3.477l-4.552-.36-1.754-4.17Z" />
-                                                    </svg>
-                                                    <svg class="w-[33px] h-[33px] fill-yellow-600" aria-hidden="true"
-                                                        xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                        fill="currentColor" viewBox="0 0 24 24">
-                                                        <path
-                                                            d="M13.849 4.22c-.684-1.626-3.014-1.626-3.698 0L8.397 8.387l-4.552.361c-1.775.14-2.495 2.331-1.142 3.477l3.468 2.937-1.06 4.392c-.413 1.713 1.472 3.067 2.992 2.149L12 19.35l3.897 2.354c1.52.918 3.405-.436 2.992-2.15l-1.06-4.39 3.468-2.938c1.353-1.146.633-3.336-1.142-3.477l-4.552-.36-1.754-4.17Z" />
-                                                    </svg>
-                                                    <svg class="w-[33px] h-[33px] fill-yellow-600" aria-hidden="true"
-                                                        xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                        fill="currentColor" viewBox="0 0 24 24">
-                                                        <path
-                                                            d="M13.849 4.22c-.684-1.626-3.014-1.626-3.698 0L8.397 8.387l-4.552.361c-1.775.14-2.495 2.331-1.142 3.477l3.468 2.937-1.06 4.392c-.413 1.713 1.472 3.067 2.992 2.149L12 19.35l3.897 2.354c1.52.918 3.405-.436 2.992-2.15l-1.06-4.39 3.468-2.938c1.353-1.146.633-3.336-1.142-3.477l-4.552-.36-1.754-4.17Z" />
-                                                    </svg>
-                                                </div>
-                                            </div>
-                                            <h3 class="text-3xl font-medium">$99</h3>
-                                        </div>
-                                        <div class="flex justify-between pt-6">
-                                            <div class="flex gap-4">
-                                                <svg class="w-[33px] h-[33px] fill-blue-300" aria-hidden="true"
-                                                    xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                    fill="none" viewBox="0 0 24 24">
-                                                    <path stroke="currentColor" stroke-linecap="round"
-                                                        stroke-linejoin="round" stroke-width="1.1"
-                                                        d="M12 6.03v13m0-13c-2.819-.831-4.715-1.076-8.029-1.023A.99.99 0 0 0 3 6v11c0 .563.466 1.014 1.03 1.007 3.122-.043 5.018.212 7.97 1.023m0-13c2.819-.831 4.715-1.076 8.029-1.023A.99.99 0 0 1 21 6v11c0 .563-.466 1.014-1.03 1.007-3.122-.043-5.018.212-7.97 1.023" />
-                                                </svg>
-
-                                                <h3 class="text-base font-medium text-black opacity-75">12 classes</h3>
-                                            </div>
-                                            <div class="flex gap-4">
-                                                <svg class="w-[33px] h-[33px] fill-blue-300" aria-hidden="true"
-                                                    xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                    fill="currentColor" viewBox="0 0 24 24">
-                                                    <path fill-rule="evenodd"
-                                                        d="M12 4a4 4 0 1 0 0 8 4 4 0 0 0 0-8Zm-2 9a4 4 0 0 0-4 4v1a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-1a4 4 0 0 0-4-4h-4Z"
-                                                        clip-rule="evenodd" />
-                                                </svg>
-
-                                                <h3 class="text-base font-medium text-black opacity-75">150 students
-                                                </h3>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-10">
+                <!-- Mentor 1 -->
+                <div class="m-3 py-14 text-center">
+                    <div class="relative">
+                        <img src="../../assets/images/mentor/user1.png" alt="صورة المستخدم" width="306"
+                            class="inline-block m-auto" />
+                        <div class="absolute right-[84px] bottom-[102px] bg-white rounded-full p-2">
+                            <svg class="w-[35px] h-[35px] fill-blue-400" aria-hidden="true"
+                                xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                                viewBox="0 0 24 24">
+                                <path fill-rule="evenodd"
+                                    d="M12.51 8.796v1.697a3.738 3.738 0 0 1 3.288-1.684c3.455 0 4.202 2.16 4.202 4.97V19.5h-3.2v-5.072c0-1.21-.244-2.766-2.128-2.766-1.827 0-2.139 1.317-2.139 2.676V19.5h-3.19V8.796h3.168ZM7.2 6.106a1.61 1.61 0 0 1-.988 1.483 1.595 1.595 0 0 1-1.743-.348A1.607 1.607 0 0 1 5.6 4.5a1.601 1.601 0 0 1 1.6 1.606Z"
+                                    clip-rule="evenodd" />
+                                <path d="M7.2 8.809H4V19.5h3.2V8.809Z" />
+                            </svg>
                         </div>
                     </div>
+                    <div class="-mt-10">
+                        <h3 class="text-2xl font-semibold text-lightblack">أحمد السيد</h3>
+                        <h4 class="text-lg font-normal text-lightblack pt-2 opacity-50">مهندس برمجيات</h4>
+                    </div>
+                </div>
 
-                    <div class="swiper-slide">
-                        <div class="slick-slider">
-                            <div class="course-item shadow-2xl rounded-2xl">
-                                <div class="bg-white m-3 mb-12 px-3 pt-3 pb-12 shadow-course-shadow rounded-2xl h-full">
-                                    <div class="relative rounded-3xl">
-                                        <img src="../../assets/images/courses/courseone.png" alt="course-image"
-                                            width="389" height="262" class="m-auto clipPath">
-                                        <div class="absolute right-5 -bottom-2 bg-secondary rounded-full p-6">
-                                            <h3 class="text-white uppercase text-center text-sm font-medium">best <br />
-                                                seller</h3>
-                                        </div>
-                                    </div>
-
-                                    <div class="px-3 pt-6">
-                                        <a href="#" class="text-2xl font-bold text-black max-w-75% inline-block">Course
-                                            Title</a>
-                                        <h3 class="text-base font-normal pt-6 text-black/75">Instructor Name</h3>
-                                        <div class="flex justify-between items-center py-6 border-b">
-                                            <div class="flex items-center gap-4">
-                                                <h3 class="text-red-700 text-2xl font-medium">4.5</h3>
-                                                <div class="flex">
-                                                    <svg class="w-[33px] h-[33px] fill-yellow-600" aria-hidden="true"
-                                                        xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                        fill="currentColor" viewBox="0 0 24 24">
-                                                        <path
-                                                            d="M13.849 4.22c-.684-1.626-3.014-1.626-3.698 0L8.397 8.387l-4.552.361c-1.775.14-2.495 2.331-1.142 3.477l3.468 2.937-1.06 4.392c-.413 1.713 1.472 3.067 2.992 2.149L12 19.35l3.897 2.354c1.52.918 3.405-.436 2.992-2.15l-1.06-4.39 3.468-2.938c1.353-1.146.633-3.336-1.142-3.477l-4.552-.36-1.754-4.17Z" />
-                                                    </svg>
-                                                    <svg class="w-[33px] h-[33px] fill-yellow-600" aria-hidden="true"
-                                                        xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                        fill="currentColor" viewBox="0 0 24 24">
-                                                        <path
-                                                            d="M13.849 4.22c-.684-1.626-3.014-1.626-3.698 0L8.397 8.387l-4.552.361c-1.775.14-2.495 2.331-1.142 3.477l3.468 2.937-1.06 4.392c-.413 1.713 1.472 3.067 2.992 2.149L12 19.35l3.897 2.354c1.52.918 3.405-.436 2.992-2.15l-1.06-4.39 3.468-2.938c1.353-1.146.633-3.336-1.142-3.477l-4.552-.36-1.754-4.17Z" />
-                                                    </svg>
-                                                    <svg class="w-[33px] h-[33px] fill-yellow-600" aria-hidden="true"
-                                                        xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                        fill="currentColor" viewBox="0 0 24 24">
-                                                        <path
-                                                            d="M13.849 4.22c-.684-1.626-3.014-1.626-3.698 0L8.397 8.387l-4.552.361c-1.775.14-2.495 2.331-1.142 3.477l3.468 2.937-1.06 4.392c-.413 1.713 1.472 3.067 2.992 2.149L12 19.35l3.897 2.354c1.52.918 3.405-.436 2.992-2.15l-1.06-4.39 3.468-2.938c1.353-1.146.633-3.336-1.142-3.477l-4.552-.36-1.754-4.17Z" />
-                                                    </svg>
-                                                    <svg class="w-[33px] h-[33px] fill-yellow-600" aria-hidden="true"
-                                                        xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                        fill="currentColor" viewBox="0 0 24 24">
-                                                        <path
-                                                            d="M13.849 4.22c-.684-1.626-3.014-1.626-3.698 0L8.397 8.387l-4.552.361c-1.775.14-2.495 2.331-1.142 3.477l3.468 2.937-1.06 4.392c-.413 1.713 1.472 3.067 2.992 2.149L12 19.35l3.897 2.354c1.52.918 3.405-.436 2.992-2.15l-1.06-4.39 3.468-2.938c1.353-1.146.633-3.336-1.142-3.477l-4.552-.36-1.754-4.17Z" />
-                                                    </svg>
-                                                    <svg class="w-[33px] h-[33px] fill-yellow-600" aria-hidden="true"
-                                                        xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                        fill="currentColor" viewBox="0 0 24 24">
-                                                        <path
-                                                            d="M13.849 4.22c-.684-1.626-3.014-1.626-3.698 0L8.397 8.387l-4.552.361c-1.775.14-2.495 2.331-1.142 3.477l3.468 2.937-1.06 4.392c-.413 1.713 1.472 3.067 2.992 2.149L12 19.35l3.897 2.354c1.52.918 3.405-.436 2.992-2.15l-1.06-4.39 3.468-2.938c1.353-1.146.633-3.336-1.142-3.477l-4.552-.36-1.754-4.17Z" />
-                                                    </svg>
-                                                </div>
-                                            </div>
-                                            <h3 class="text-3xl font-medium">$99</h3>
-                                        </div>
-                                        <div class="flex justify-between pt-6">
-                                            <div class="flex gap-4">
-                                                <svg class="w-[33px] h-[33px] fill-blue-300" aria-hidden="true"
-                                                    xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                    fill="none" viewBox="0 0 24 24">
-                                                    <path stroke="currentColor" stroke-linecap="round"
-                                                        stroke-linejoin="round" stroke-width="1.1"
-                                                        d="M12 6.03v13m0-13c-2.819-.831-4.715-1.076-8.029-1.023A.99.99 0 0 0 3 6v11c0 .563.466 1.014 1.03 1.007 3.122-.043 5.018.212 7.97 1.023m0-13c2.819-.831 4.715-1.076 8.029-1.023A.99.99 0 0 1 21 6v11c0 .563-.466 1.014-1.03 1.007-3.122-.043-5.018.212-7.97 1.023" />
-                                                </svg>
-
-                                                <h3 class="text-base font-medium text-black opacity-75">12 classes</h3>
-                                            </div>
-                                            <div class="flex gap-4">
-                                                <svg class="w-[33px] h-[33px] fill-blue-300" aria-hidden="true"
-                                                    xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                    fill="currentColor" viewBox="0 0 24 24">
-                                                    <path fill-rule="evenodd"
-                                                        d="M12 4a4 4 0 1 0 0 8 4 4 0 0 0 0-8Zm-2 9a4 4 0 0 0-4 4v1a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-1a4 4 0 0 0-4-4h-4Z"
-                                                        clip-rule="evenodd" />
-                                                </svg>
-
-                                                <h3 class="text-base font-medium text-black opacity-75">150 students
-                                                </h3>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                <!-- Mentor 2 -->
+                <div class="m-3 py-14 text-center">
+                    <div class="relative">
+                        <img src="../../assets/images/mentor/user2.png" alt="صورة المستخدم" width="306"
+                            class="inline-block m-auto" />
+                        <div class="absolute right-[84px] bottom-[102px] bg-white rounded-full p-2">
+                            <svg class="w-[35px] h-[35px] fill-blue-400" aria-hidden="true"
+                                xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                                viewBox="0 0 24 24">
+                                <path fill-rule="evenodd"
+                                    d="M12.51 8.796v1.697a3.738 3.738 0 0 1 3.288-1.684c3.455 0 4.202 2.16 4.202 4.97V19.5h-3.2v-5.072c0-1.21-.244-2.766-2.128-2.766-1.827 0-2.139 1.317-2.139 2.676V19.5h-3.19V8.796h3.168ZM7.2 6.106a1.61 1.61 0 0 1-.988 1.483 1.595 1.595 0 0 1-1.743-.348A1.607 1.607 0 0 1 5.6 4.5a1.601 1.601 0 0 1 1.6 1.606Z"
+                                    clip-rule="evenodd" />
+                                <path d="M7.2 8.809H4V19.5h3.2V8.809Z" />
+                            </svg>
                         </div>
                     </div>
-                    <div class="swiper-slide">
-                        <div class="slick-slider">
-                            <div class="course-item shadow-2xl rounded-2xl">
-                                <div class="bg-white m-3 mb-12 px-3 pt-3 pb-12 shadow-course-shadow rounded-2xl h-full">
-                                    <div class="relative rounded-3xl">
-                                        <img src="../../assets/images/courses/courseone.png" alt="course-image"
-                                            width="389" height="262" class="m-auto clipPath">
-                                        <div class="absolute right-5 -bottom-2 bg-secondary rounded-full p-6">
-                                            <h3 class="text-white uppercase text-center text-sm font-medium">best <br />
-                                                seller</h3>
-                                        </div>
-                                    </div>
+                    <div class="-mt-10">
+                        <h3 class="text-2xl font-semibold text-lightblack">سارة محمود</h3>
+                        <h4 class="text-lg font-normal text-lightblack pt-2 opacity-50">عالمة بيانات</h4>
+                    </div>
+                </div>
 
-                                    <div class="px-3 pt-6">
-                                        <a href="#" class="text-2xl font-bold text-black max-w-75% inline-block">Course
-                                            Title</a>
-                                        <h3 class="text-base font-normal pt-6 text-black/75">Instructor Name</h3>
-                                        <div class="flex justify-between items-center py-6 border-b">
-                                            <div class="flex items-center gap-4">
-                                                <h3 class="text-red-700 text-2xl font-medium">4.5</h3>
-                                                <div class="flex">
-                                                    <svg class="w-[33px] h-[33px] fill-yellow-600" aria-hidden="true"
-                                                        xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                        fill="currentColor" viewBox="0 0 24 24">
-                                                        <path
-                                                            d="M13.849 4.22c-.684-1.626-3.014-1.626-3.698 0L8.397 8.387l-4.552.361c-1.775.14-2.495 2.331-1.142 3.477l3.468 2.937-1.06 4.392c-.413 1.713 1.472 3.067 2.992 2.149L12 19.35l3.897 2.354c1.52.918 3.405-.436 2.992-2.15l-1.06-4.39 3.468-2.938c1.353-1.146.633-3.336-1.142-3.477l-4.552-.36-1.754-4.17Z" />
-                                                    </svg>
-                                                    <svg class="w-[33px] h-[33px] fill-yellow-600" aria-hidden="true"
-                                                        xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                        fill="currentColor" viewBox="0 0 24 24">
-                                                        <path
-                                                            d="M13.849 4.22c-.684-1.626-3.014-1.626-3.698 0L8.397 8.387l-4.552.361c-1.775.14-2.495 2.331-1.142 3.477l3.468 2.937-1.06 4.392c-.413 1.713 1.472 3.067 2.992 2.149L12 19.35l3.897 2.354c1.52.918 3.405-.436 2.992-2.15l-1.06-4.39 3.468-2.938c1.353-1.146.633-3.336-1.142-3.477l-4.552-.36-1.754-4.17Z" />
-                                                    </svg>
-                                                    <svg class="w-[33px] h-[33px] fill-yellow-600" aria-hidden="true"
-                                                        xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                        fill="currentColor" viewBox="0 0 24 24">
-                                                        <path
-                                                            d="M13.849 4.22c-.684-1.626-3.014-1.626-3.698 0L8.397 8.387l-4.552.361c-1.775.14-2.495 2.331-1.142 3.477l3.468 2.937-1.06 4.392c-.413 1.713 1.472 3.067 2.992 2.149L12 19.35l3.897 2.354c1.52.918 3.405-.436 2.992-2.15l-1.06-4.39 3.468-2.938c1.353-1.146.633-3.336-1.142-3.477l-4.552-.36-1.754-4.17Z" />
-                                                    </svg>
-                                                    <svg class="w-[33px] h-[33px] fill-yellow-600" aria-hidden="true"
-                                                        xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                        fill="currentColor" viewBox="0 0 24 24">
-                                                        <path
-                                                            d="M13.849 4.22c-.684-1.626-3.014-1.626-3.698 0L8.397 8.387l-4.552.361c-1.775.14-2.495 2.331-1.142 3.477l3.468 2.937-1.06 4.392c-.413 1.713 1.472 3.067 2.992 2.149L12 19.35l3.897 2.354c1.52.918 3.405-.436 2.992-2.15l-1.06-4.39 3.468-2.938c1.353-1.146.633-3.336-1.142-3.477l-4.552-.36-1.754-4.17Z" />
-                                                    </svg>
-                                                    <svg class="w-[33px] h-[33px] fill-yellow-600" aria-hidden="true"
-                                                        xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                        fill="currentColor" viewBox="0 0 24 24">
-                                                        <path
-                                                            d="M13.849 4.22c-.684-1.626-3.014-1.626-3.698 0L8.397 8.387l-4.552.361c-1.775.14-2.495 2.331-1.142 3.477l3.468 2.937-1.06 4.392c-.413 1.713 1.472 3.067 2.992 2.149L12 19.35l3.897 2.354c1.52.918 3.405-.436 2.992-2.15l-1.06-4.39 3.468-2.938c1.353-1.146.633-3.336-1.142-3.477l-4.552-.36-1.754-4.17Z" />
-                                                    </svg>
-                                                </div>
-                                            </div>
-                                            <h3 class="text-3xl font-medium">$99</h3>
-                                        </div>
-                                        <div class="flex justify-between pt-6">
-                                            <div class="flex gap-4">
-                                                <svg class="w-[33px] h-[33px] fill-blue-300" aria-hidden="true"
-                                                    xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                    fill="none" viewBox="0 0 24 24">
-                                                    <path stroke="currentColor" stroke-linecap="round"
-                                                        stroke-linejoin="round" stroke-width="1.1"
-                                                        d="M12 6.03v13m0-13c-2.819-.831-4.715-1.076-8.029-1.023A.99.99 0 0 0 3 6v11c0 .563.466 1.014 1.03 1.007 3.122-.043 5.018.212 7.97 1.023m0-13c2.819-.831 4.715-1.076 8.029-1.023A.99.99 0 0 1 21 6v11c0 .563-.466 1.014-1.03 1.007-3.122-.043-5.018.212-7.97 1.023" />
-                                                </svg>
-
-                                                <h3 class="text-base font-medium text-black opacity-75">12 classes</h3>
-                                            </div>
-                                            <div class="flex gap-4">
-                                                <svg class="w-[33px] h-[33px] fill-blue-300" aria-hidden="true"
-                                                    xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                    fill="currentColor" viewBox="0 0 24 24">
-                                                    <path fill-rule="evenodd"
-                                                        d="M12 4a4 4 0 1 0 0 8 4 4 0 0 0 0-8Zm-2 9a4 4 0 0 0-4 4v1a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-1a4 4 0 0 0-4-4h-4Z"
-                                                        clip-rule="evenodd" />
-                                                </svg>
-
-                                                <h3 class="text-base font-medium text-black opacity-75">150 students
-                                                </h3>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                <!-- Mentor 3 -->
+                <div class="m-3 py-14 text-center">
+                    <div class="relative">
+                        <img src="../../assets/images/mentor/user3.png" alt="صورة المستخدم" width="306"
+                            class="inline-block m-auto" />
+                        <div class="absolute right-[84px] bottom-[102px] bg-white rounded-full p-2">
+                            <svg class="w-[35px] h-[35px] fill-blue-400" aria-hidden="true"
+                                xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                                viewBox="0 0 24 24">
+                                <path fill-rule="evenodd"
+                                    d="M12.51 8.796v1.697a3.738 3.738 0 0 1 3.288-1.684c3.455 0 4.202 2.16 4.202 4.97V19.5h-3.2v-5.072c0-1.21-.244-2.766-2.128-2.766-1.827 0-2.139 1.317-2.139 2.676V19.5h-3.19V8.796h3.168ZM7.2 6.106a1.61 1.61 0 0 1-.988 1.483 1.595 1.595 0 0 1-1.743-.348A1.607 1.607 0 0 1 5.6 4.5a1.601 1.601 0 0 1 1.6 1.606Z"
+                                    clip-rule="evenodd" />
+                                <path d="M7.2 8.809H4V19.5h3.2V8.809Z" />
+                            </svg>
                         </div>
                     </div>
-                    <div class="swiper-slide">
-                        <div class="slick-slider">
-                            <div class="course-item shadow-2xl rounded-2xl">
-                                <div class="bg-white m-3 mb-12 px-3 pt-3 pb-12 shadow-course-shadow rounded-2xl h-full">
-                                    <div class="relative rounded-3xl">
-                                        <img src="../../assets/images/courses/courseone.png" alt="course-image"
-                                            width="389" height="262" class="m-auto clipPath">
-                                        <div class="absolute right-5 -bottom-2 bg-secondary rounded-full p-6">
-                                            <h3 class="text-white uppercase text-center text-sm font-medium">best <br />
-                                                seller</h3>
-                                        </div>
-                                    </div>
+                    <div class="-mt-10">
+                        <h3 class="text-2xl font-semibold text-lightblack">علي حسن</h3>
+                        <h4 class="text-lg font-normal text-lightblack pt-2 opacity-50">مدير منتج</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-                                    <div class="px-3 pt-6">
-                                        <a href="#" class="text-2xl font-bold text-black max-w-75% inline-block">Course
-                                            Title</a>
-                                        <h3 class="text-base font-normal pt-6 text-black/75">Instructor Name</h3>
-                                        <div class="flex justify-between items-center py-6 border-b">
-                                            <div class="flex items-center gap-4">
-                                                <h3 class="text-red-700 text-2xl font-medium">4.5</h3>
-                                                <div class="flex">
-                                                    <svg class="w-[33px] h-[33px] fill-yellow-600" aria-hidden="true"
-                                                        xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                        fill="currentColor" viewBox="0 0 24 24">
-                                                        <path
-                                                            d="M13.849 4.22c-.684-1.626-3.014-1.626-3.698 0L8.397 8.387l-4.552.361c-1.775.14-2.495 2.331-1.142 3.477l3.468 2.937-1.06 4.392c-.413 1.713 1.472 3.067 2.992 2.149L12 19.35l3.897 2.354c1.52.918 3.405-.436 2.992-2.15l-1.06-4.39 3.468-2.938c1.353-1.146.633-3.336-1.142-3.477l-4.552-.36-1.754-4.17Z" />
-                                                    </svg>
-                                                    <svg class="w-[33px] h-[33px] fill-yellow-600" aria-hidden="true"
-                                                        xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                        fill="currentColor" viewBox="0 0 24 24">
-                                                        <path
-                                                            d="M13.849 4.22c-.684-1.626-3.014-1.626-3.698 0L8.397 8.387l-4.552.361c-1.775.14-2.495 2.331-1.142 3.477l3.468 2.937-1.06 4.392c-.413 1.713 1.472 3.067 2.992 2.149L12 19.35l3.897 2.354c1.52.918 3.405-.436 2.992-2.15l-1.06-4.39 3.468-2.938c1.353-1.146.633-3.336-1.142-3.477l-4.552-.36-1.754-4.17Z" />
-                                                    </svg>
-                                                    <svg class="w-[33px] h-[33px] fill-yellow-600" aria-hidden="true"
-                                                        xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                        fill="currentColor" viewBox="0 0 24 24">
-                                                        <path
-                                                            d="M13.849 4.22c-.684-1.626-3.014-1.626-3.698 0L8.397 8.387l-4.552.361c-1.775.14-2.495 2.331-1.142 3.477l3.468 2.937-1.06 4.392c-.413 1.713 1.472 3.067 2.992 2.149L12 19.35l3.897 2.354c1.52.918 3.405-.436 2.992-2.15l-1.06-4.39 3.468-2.938c1.353-1.146.633-3.336-1.142-3.477l-4.552-.36-1.754-4.17Z" />
-                                                    </svg>
-                                                    <svg class="w-[33px] h-[33px] fill-yellow-600" aria-hidden="true"
-                                                        xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                        fill="currentColor" viewBox="0 0 24 24">
-                                                        <path
-                                                            d="M13.849 4.22c-.684-1.626-3.014-1.626-3.698 0L8.397 8.387l-4.552.361c-1.775.14-2.495 2.331-1.142 3.477l3.468 2.937-1.06 4.392c-.413 1.713 1.472 3.067 2.992 2.149L12 19.35l3.897 2.354c1.52.918 3.405-.436 2.992-2.15l-1.06-4.39 3.468-2.938c1.353-1.146.633-3.336-1.142-3.477l-4.552-.36-1.754-4.17Z" />
-                                                    </svg>
-                                                    <svg class="w-[33px] h-[33px] fill-yellow-600" aria-hidden="true"
-                                                        xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                        fill="currentColor" viewBox="0 0 24 24">
-                                                        <path
-                                                            d="M13.849 4.22c-.684-1.626-3.014-1.626-3.698 0L8.397 8.387l-4.552.361c-1.775.14-2.495 2.331-1.142 3.477l3.468 2.937-1.06 4.392c-.413 1.713 1.472 3.067 2.992 2.149L12 19.35l3.897 2.354c1.52.918 3.405-.436 2.992-2.15l-1.06-4.39 3.468-2.938c1.353-1.146.633-3.336-1.142-3.477l-4.552-.36-1.754-4.17Z" />
-                                                    </svg>
-                                                </div>
-                                            </div>
-                                            <h3 class="text-3xl font-medium">$99</h3>
-                                        </div>
-                                        <div class="flex justify-between pt-6">
-                                            <div class="flex gap-4">
-                                                <svg class="w-[33px] h-[33px] fill-blue-300" aria-hidden="true"
-                                                    xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                    fill="none" viewBox="0 0 24 24">
-                                                    <path stroke="currentColor" stroke-linecap="round"
-                                                        stroke-linejoin="round" stroke-width="1.1"
-                                                        d="M12 6.03v13m0-13c-2.819-.831-4.715-1.076-8.029-1.023A.99.99 0 0 0 3 6v11c0 .563.466 1.014 1.03 1.007 3.122-.043 5.018.212 7.97 1.023m0-13c2.819-.831 4.715-1.076 8.029-1.023A.99.99 0 0 1 21 6v11c0 .563-.466 1.014-1.03 1.007-3.122-.043-5.018.212-7.97 1.023" />
-                                                </svg>
-
-                                                <h3 class="text-base font-medium text-black opacity-75">12 classes</h3>
-                                            </div>
-                                            <div class="flex gap-4">
-                                                <svg class="w-[33px] h-[33px] fill-blue-300" aria-hidden="true"
-                                                    xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                    fill="currentColor" viewBox="0 0 24 24">
-                                                    <path fill-rule="evenodd"
-                                                        d="M12 4a4 4 0 1 0 0 8 4 4 0 0 0 0-8Zm-2 9a4 4 0 0 0-4 4v1a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-1a4 4 0 0 0-4-4h-4Z"
-                                                        clip-rule="evenodd" />
-                                                </svg>
-
-                                                <h3 class="text-base font-medium text-black opacity-75">150 students
-                                                </h3>
-                                            </div>
-                                        </div>
-                                    </div>
+    <section class="py-16">
+        <div class="container mx-auto lg:max-w-screen-xl md:max-w-screen-md px-4">
+            <div class="grid grid-cols-1 gap-y-10 gap-x-6 md:grid-cols-12 xl:gap-x-8">
+                <div class="col-span-12 bg-newsletter-bg-2 bg-contain bg-no-repeat bg-cover lg:bg-contain"
+                    style="background-image: url('../../assets/images/newsletter/bgFile.png'); ">
+                    <div class="mb-10 mt-24 lg:mx-64 lg:my-24">
+                        <h3 class="text-4xl md:text-5xl text-center font-semibold text-white mb-3">النشرة الإخبارية.
+                        </h3>
+                        <h3 class="text-base font-normal text-white/75 text-center mb-8">
+                            اشترك في نشرتنا الإخبارية للحصول على خصومات، <br /> عروض ترويجية والكثير غيرها.
+                        </h3>
+                        <div>
+                            <div
+                                class="relative text-white focus-within:text-white flex flex-row-reverse rounded-full pt-5 lg:pt-0">
+                                <input type="email" name="q"
+                                    class="py-6 px-4 lg:py-8 text-sm md:text-lg w-full mx-3 text-black rounded-full pl-8 focus:outline-none focus:text-black"
+                                    placeholder="أدخل عنوان بريدك الإلكتروني" autocomplete="off" />
+                                <div class="absolute inset-y-0 left-5 flex items-center pr-6 pt-5 lg:pt-0">
+                                    <button type="submit"
+                                        class="p-3 lg:p-5 focus:outline-none bg-gray-200 focus:shadow-outline bg-ultramarine hover:bg-midnightblue duration-150 ease-in-out rounded-full">
+                                        <img src="../../assets/images/newsletter/send.svg" alt="send-icon" width="30"
+                                            height="30" />
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -516,110 +271,6 @@
             </div>
         </div>
     </section>
-
-<section class="bg-blue-100 py-16" id="mentor">
-    <div class="container mx-auto lg:max-w-screen-xl md:max-w-screen-md px-4 relative">
-        <h2 class="text-midnight_text text-5xl font-semibold">تعرف على مرشدينا.</h2>
-
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-10">
-            <!-- Mentor 1 -->
-            <div class="m-3 py-14 text-center">
-                <div class="relative">
-                    <img src="../../assets/images/mentor/user1.png" alt="صورة المستخدم" width="306"
-                        class="inline-block m-auto" />
-                    <div class="absolute right-[84px] bottom-[102px] bg-white rounded-full p-2">
-                        <svg class="w-[35px] h-[35px] fill-blue-400" aria-hidden="true"
-                            xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
-                            viewBox="0 0 24 24">
-                            <path fill-rule="evenodd"
-                                d="M12.51 8.796v1.697a3.738 3.738 0 0 1 3.288-1.684c3.455 0 4.202 2.16 4.202 4.97V19.5h-3.2v-5.072c0-1.21-.244-2.766-2.128-2.766-1.827 0-2.139 1.317-2.139 2.676V19.5h-3.19V8.796h3.168ZM7.2 6.106a1.61 1.61 0 0 1-.988 1.483 1.595 1.595 0 0 1-1.743-.348A1.607 1.607 0 0 1 5.6 4.5a1.601 1.601 0 0 1 1.6 1.606Z"
-                                clip-rule="evenodd" />
-                            <path d="M7.2 8.809H4V19.5h3.2V8.809Z" />
-                        </svg>
-                    </div>
-                </div>
-                <div class="-mt-10">
-                    <h3 class="text-2xl font-semibold text-lightblack">أحمد السيد</h3>
-                    <h4 class="text-lg font-normal text-lightblack pt-2 opacity-50">مهندس برمجيات</h4>
-                </div>
-            </div>
-
-            <!-- Mentor 2 -->
-            <div class="m-3 py-14 text-center">
-                <div class="relative">
-                    <img src="../../assets/images/mentor/user2.png" alt="صورة المستخدم" width="306"
-                        class="inline-block m-auto" />
-                    <div class="absolute right-[84px] bottom-[102px] bg-white rounded-full p-2">
-                        <svg class="w-[35px] h-[35px] fill-blue-400" aria-hidden="true"
-                            xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
-                            viewBox="0 0 24 24">
-                            <path fill-rule="evenodd"
-                                d="M12.51 8.796v1.697a3.738 3.738 0 0 1 3.288-1.684c3.455 0 4.202 2.16 4.202 4.97V19.5h-3.2v-5.072c0-1.21-.244-2.766-2.128-2.766-1.827 0-2.139 1.317-2.139 2.676V19.5h-3.19V8.796h3.168ZM7.2 6.106a1.61 1.61 0 0 1-.988 1.483 1.595 1.595 0 0 1-1.743-.348A1.607 1.607 0 0 1 5.6 4.5a1.601 1.601 0 0 1 1.6 1.606Z"
-                                clip-rule="evenodd" />
-                            <path d="M7.2 8.809H4V19.5h3.2V8.809Z" />
-                        </svg>
-                    </div>
-                </div>
-                <div class="-mt-10">
-                    <h3 class="text-2xl font-semibold text-lightblack">سارة محمود</h3>
-                    <h4 class="text-lg font-normal text-lightblack pt-2 opacity-50">عالمة بيانات</h4>
-                </div>
-            </div>
-
-            <!-- Mentor 3 -->
-            <div class="m-3 py-14 text-center">
-                <div class="relative">
-                    <img src="../../assets/images/mentor/user3.png" alt="صورة المستخدم" width="306"
-                        class="inline-block m-auto" />
-                    <div class="absolute right-[84px] bottom-[102px] bg-white rounded-full p-2">
-                        <svg class="w-[35px] h-[35px] fill-blue-400" aria-hidden="true"
-                            xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
-                            viewBox="0 0 24 24">
-                            <path fill-rule="evenodd"
-                                d="M12.51 8.796v1.697a3.738 3.738 0 0 1 3.288-1.684c3.455 0 4.202 2.16 4.202 4.97V19.5h-3.2v-5.072c0-1.21-.244-2.766-2.128-2.766-1.827 0-2.139 1.317-2.139 2.676V19.5h-3.19V8.796h3.168ZM7.2 6.106a1.61 1.61 0 0 1-.988 1.483 1.595 1.595 0 0 1-1.743-.348A1.607 1.607 0 0 1 5.6 4.5a1.601 1.601 0 0 1 1.6 1.606Z"
-                                clip-rule="evenodd" />
-                            <path d="M7.2 8.809H4V19.5h3.2V8.809Z" />
-                        </svg>
-                    </div>
-                </div>
-                <div class="-mt-10">
-                    <h3 class="text-2xl font-semibold text-lightblack">علي حسن</h3>
-                    <h4 class="text-lg font-normal text-lightblack pt-2 opacity-50">مدير منتج</h4>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<section class="py-16">
-    <div class="container mx-auto lg:max-w-screen-xl md:max-w-screen-md px-4">
-        <div class="grid grid-cols-1 gap-y-10 gap-x-6 md:grid-cols-12 xl:gap-x-8">
-            <div class="col-span-12 bg-newsletter-bg-2 bg-contain bg-no-repeat bg-cover lg:bg-contain"
-                style="background-image: url('../../assets/images/newsletter/bgFile.png'); ">
-                <div class="mb-10 mt-24 lg:mx-64 lg:my-24">
-                    <h3 class="text-4xl md:text-5xl text-center font-semibold text-white mb-3">النشرة الإخبارية.</h3>
-                    <h3 class="text-base font-normal text-white/75 text-center mb-8">
-                        اشترك في نشرتنا الإخبارية للحصول على خصومات، <br /> عروض ترويجية والكثير غيرها.
-                    </h3>
-                    <div>
-                        <div class="relative text-white focus-within:text-white flex flex-row-reverse rounded-full pt-5 lg:pt-0">
-                            <input type="email" name="q"
-                                class="py-6 px-4 lg:py-8 text-sm md:text-lg w-full mx-3 text-black rounded-full pl-8 focus:outline-none focus:text-black"
-                                placeholder="أدخل عنوان بريدك الإلكتروني" autocomplete="off" />
-                            <div class="absolute inset-y-0 left-5 flex items-center pr-6 pt-5 lg:pt-0">
-                                <button type="submit"
-                                    class="p-3 lg:p-5 focus:outline-none bg-gray-200 focus:shadow-outline bg-ultramarine hover:bg-midnightblue duration-150 ease-in-out rounded-full">
-                                    <img src="../../assets/images/newsletter/send.svg" alt="send-icon" width="30"
-                                        height="30" />
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
 
     <?php include '../footer.php'; ?>
 

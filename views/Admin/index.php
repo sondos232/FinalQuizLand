@@ -50,6 +50,7 @@ $answersData = $answersResult->fetch_assoc();
 
 $correctAnswers = $answersData['correct'];
 $incorrectAnswers = $answersData['incorrect'];
+
 ?>
 
 <!DOCTYPE html>
@@ -68,47 +69,7 @@ $incorrectAnswers = $answersData['incorrect'];
 <body class="bg-gray-100 overflow-x-hidden">
 
     <div class="flex">
-        <!-- Sidebar -->
-        <!-- Sidebar -->
-        <div class="w-64 bg-blue-900 text-white min-h-screen md:block hidden" id="sidebar">
-            <div class="p-6 text-center bg-blue-100">
-                <img src="../../assets/images/logo/logo.svg" alt="Logo" width="150" class="mx-auto">
-            </div>
-            <div class="mt-10">
-                <ul>
-                    <li class="py-3 px-6 hover:bg-purple-700">
-                        <a href="#" class="text-xl flex items-center">
-                            <i class="fas fa-tachometer-alt mr-3"></i>
-                            اللوحة الرئيسية
-                        </a>
-                    </li>
-                    <li class="py-3 px-6 hover:bg-purple-700">
-                        <a href="#" class="text-xl flex items-center">
-                            <i class="fas fa-chalkboard-teacher mr-3"></i>
-                            الاختبارات
-                        </a>
-                    </li>
-                    <li class="py-3 px-6 hover:bg-purple-700">
-                        <a href="#" class="text-xl flex items-center">
-                            <i class="fas fa-users mr-3"></i>
-                            المستخدمين
-                        </a>
-                    </li>
-                    <li class="py-3 px-6 hover:bg-purple-700">
-                        <a href="#" class="text-xl flex items-center">
-                            <i class="fas fa-cogs mr-3"></i>
-                            الإعدادات
-                        </a>
-                    </li>
-                    <li class="py-3 px-6 hover:bg-purple-700">
-                        <a href="#" class="text-xl flex items-center">
-                            <i class="fas fa-chart-line mr-3"></i>
-                            التقارير
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </div>
+        <?php include 'sidebar.php'; ?>
 
         <!-- Main Content Area -->
         <div class="flex-1">
@@ -126,7 +87,7 @@ $incorrectAnswers = $answersData['incorrect'];
                 </div>
                 <div class="flex items-center space-x-4">
                     <div class="relative">
-                        <button class="px-4 py-2 bg-indigo-600 text-white rounded-md">تسجيل الخروج</button>
+                        <a href="../auth/logout.php" class="px-4 py-2 bg-indigo-600 text-white rounded-md">تسجيل الخروج</a>
                     </div>
                 </div>
             </div>
@@ -187,8 +148,7 @@ $incorrectAnswers = $answersData['incorrect'];
             const sidebar = document.getElementById('sidebar');
             sidebar.classList.toggle('hidden'); // Toggle the hidden class on the sidebar
         });
-
-        // Bar Chart: Number of Quizzes per Category
+        
         const barCtx = document.getElementById('barChart').getContext('2d');
         const barChart = new Chart(barCtx, {
             type: 'bar',
