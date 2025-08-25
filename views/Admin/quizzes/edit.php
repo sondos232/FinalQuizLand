@@ -67,9 +67,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             class="w-full px-4 py-2 border rounded-md" required><?= $quiz['description'] ?></textarea>
                     </div>
 
-                    <div class="mt-6">
+                    <div class="mt-6 flex gap-3">
                         <button type="submit" class="px-6 py-2 bg-blue-600 text-white rounded-md">تحديث
                             الاختبار</button>
+                                                    <a href="index.php" class="px-6 py-2 bg-gray-500 text-white rounded-md hover:bg-gray-600">
+                            العودة للقائمة
+                        </a>
                     </div>
                 </form>
             </div>

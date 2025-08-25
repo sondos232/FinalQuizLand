@@ -2,21 +2,17 @@
 include '../../config/db.php';
 include '../header.php';
 
-// Get the quiz ID from the URL
 $quiz_id = isset($_GET['quiz_id']) ? (int) $_GET['quiz_id'] : 0;
 
-// Fetch quiz details from the database
 $quizQuery = "SELECT * FROM quizzes WHERE id = $quiz_id";
 $quizResult = $conn->query($quizQuery);
 $quiz = $quizResult->fetch_assoc();
 
-// If no quiz found, redirect to the courses page
 if (!$quiz) {
-    header('Location: /courses');
+    header('Location: ./index.php');
     exit();
 }
 
-// Fetch the quiz creator's name
 $creatorQuery = "SELECT username FROM users WHERE id = " . $quiz['created_by'];
 $creatorResult = $conn->query($creatorQuery);
 $creator = $creatorResult->fetch_assoc()['username'];
@@ -89,7 +85,6 @@ $creator = $creatorResult->fetch_assoc()['username'];
             z-index: 9998;
         }
 
-        /* Style for the buttons */
         .btn-radio {
             background-color: #f7fafc;
             border-radius: 0.75rem;
@@ -102,24 +97,20 @@ $creator = $creatorResult->fetch_assoc()['username'];
             justify-content: center;
         }
 
-        /* Hide the radio button but make the label clickable */
         .btn-radio input[type="radio"] {
             display: none;
         }
 
-        /* Default span text color */
         .btn-radio span {
             color: #333;
             padding: 1rem 2rem;
         }
 
-        /* Hover effect */
         .btn-radio:hover {
             background-color: #e2e8f0;
             border-color: #ddd;
         }
 
-        /* Active button style when radio is checked */
         .btn-radio input[type="radio"]:checked+span {
             background-color: #3182ce;
             color: white;
@@ -131,7 +122,6 @@ $creator = $creatorResult->fetch_assoc()['username'];
 
 <body class="bg-gray-100">
 
-    <!-- Quiz Details -->
     <div class="container mx-auto px-4 py-6 mt-20">
         <div class="card">
             <h2 class="text-4xl font-bold text-black"><?= $quiz['title'] ?></h2>
@@ -139,12 +129,10 @@ $creator = $creatorResult->fetch_assoc()['username'];
             </p>
 
             <div class="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                <!-- Number of Questions -->
                 <div class="info-card">
                     <h3>عدد الأسئلة</h3>
                     <p class="mt-2">
                         <?php
-                        // Fetch the number of questions for this quiz
                         $questionsQuery = "SELECT COUNT(*) AS total_questions FROM questions WHERE quiz_id = $quiz_id";
                         $questionsResult = $conn->query($questionsQuery);
                         $questionsCount = $questionsResult->fetch_assoc()['total_questions'];
@@ -153,32 +141,27 @@ $creator = $creatorResult->fetch_assoc()['username'];
                     </p>
                 </div>
 
-                <!-- Quiz Creator -->
                 <div class="info-card">
                     <h3>منشئ الاختبار</h3>
                     <p class="mt-2"><?= $creator ?></p>
                 </div>
 
-                <!-- Category -->
                 <div class="info-card">
                     <h3>الفئة</h3>
                     <p class="mt-2"><?= $quiz['category'] ?></p>
                 </div>
             </div>
 
-            <!-- Start Quiz Button -->
             <form action="start-quiz.php" method="POST" class="mt-6 text-center">
                 <input type="hidden" name="quiz_id" value="<?= $quiz['id'] ?>">
                 <button type="button" id="startQuizBtn" class="btn-primary">ابدأ الاختبار</button>
             </form>
 
-            <!-- Quiz Settings Form (Hidden by default) -->
             <div id="quizSettingsForm" class="form-container mt-6">
                 <h3 class="text-2xl font-semibold text-black">إعدادات الاختبار</h3>
                 <form action="start-quiz.php" method="POST" class="mt-6">
                     <input type="hidden" name="quiz_id" value="<?= $quiz['id'] ?>">
 
-                    <!-- Number of Questions -->
                     <div class="mb-4">
                         <label for="num_questions" class="block text-lg font-medium text-gray-700">عدد الأسئلة</label>
                         <select name="num_questions" id="num_questions"
@@ -189,7 +172,6 @@ $creator = $creatorResult->fetch_assoc()['username'];
                         </select>
                     </div>
 
-                    <!-- Timer -->
                     <div class="mb-4">
                         <label for="timer" class="block text-lg font-medium text-gray-700">تفعيل المؤقت</label>
                         <select name="timer" id="timer" class="w-full p-3 mt-2 border border-gray-300 rounded-md">
@@ -197,7 +179,6 @@ $creator = $creatorResult->fetch_assoc()['username'];
                             <option value="0">لا</option>
                         </select>
                     </div>
-                    <!-- Difficulty -->
                     <div class="mb-4">
                         <label for="difficulty" class="block text-lg font-medium text-gray-700">الصعوبة</label>
                         <div class="radio-button-group mt-4">
@@ -222,17 +203,14 @@ $creator = $creatorResult->fetch_assoc()['username'];
         </div>
     </div>
 
-    <!-- Overlay (background) -->
     <div id="overlay" class="overlay" style="display: none;"></div>
 
     <script>
-        // Show the quiz settings form when the start button is clicked
         document.getElementById('startQuizBtn').addEventListener('click', function () {
             document.getElementById('quizSettingsForm').classList.toggle('active');
             document.getElementById('overlay').style.display = 'block';
         });
 
-        // Hide the form and overlay when clicking outside the form
         document.getElementById('overlay').addEventListener('click', function () {
             document.getElementById('quizSettingsForm').classList.remove('active');
             document.getElementById('overlay').style.display = 'none';
@@ -240,25 +218,21 @@ $creator = $creatorResult->fetch_assoc()['username'];
     </script>
 
     <script>
-        // Optional: Handle form submission if needed
         document.getElementById('quizSettingsForm').addEventListener('submit', function (event) {
             event.preventDefault();
 
-            // Collect form data
             var numQuestions = document.getElementById('num_questions').value;
             var timer = document.getElementById('timer').value;
             var difficulty = document.querySelector('input[name="difficulty"]:checked').value;
 
-            // Create a hidden form that will submit the data to start the quiz
             var form = document.createElement('form');
             form.method = 'POST';
             form.action = 'start-quiz.php';
 
-            // Create hidden inputs for the data
             var inputQuizId = document.createElement('input');
             inputQuizId.type = 'hidden';
             inputQuizId.name = 'quiz_id';
-            inputQuizId.value = '<?= $quiz['id'] ?>'; // Assuming $quiz['id'] is available
+            inputQuizId.value = '<?= $quiz['id'] ?>';
 
             var inputNumQuestions = document.createElement('input');
             inputNumQuestions.type = 'hidden';
@@ -275,13 +249,11 @@ $creator = $creatorResult->fetch_assoc()['username'];
             inputDifficulty.name = 'difficulty';
             inputDifficulty.value = difficulty;
 
-            // Append inputs to the form
             form.appendChild(inputQuizId);
             form.appendChild(inputNumQuestions);
             form.appendChild(inputTimer);
             form.appendChild(inputDifficulty);
 
-            // Append the form to the body and submit
             document.body.appendChild(form);
             form.submit();
         });

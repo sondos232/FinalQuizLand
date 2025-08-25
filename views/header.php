@@ -1,24 +1,22 @@
 <header class="fixed top-0 inset-x-0 bg-white z-[500] shadow-md">
     <div class="container mx-auto lg:max-w-screen-xl md:max-w-screen-md px-4 py-8 flex justify-between items-center">
         <div class="flex">
-            <!-- Hamburger Icon (Only visible on mobile) -->
             <div class="md:hidden flex items-center ml-3">
                 <button id="hamburger" onclick="toggleMobileMenu()">
-                    <svg class="w-8 h-8 text-gray-700" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                        stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16">
+                    <svg class="w-8 h-8 text-gray-700" xmlns="http://www.w3.org/2000/svg" fill="none"
+                        viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h16M4 18h16">
                         </path>
                     </svg>
                 </button>
             </div>
-    
-            <!-- Logo Section -->
+
             <div>
                 <img src="/QuizLand/assets/images/logo/logo.svg" width="150" alt="شعار QuizLand">
             </div>
         </div>
 
-        <!-- Navigation Links (Hidden on mobile) -->
         <div class="hidden md:flex space-x-8">
             <a href="/QuizLand/views/home" class="text-gray-700 hover:text-blue-500 ml-8">الرئيسية</a>
             <a href="/QuizLand/views/quizzes" class="text-gray-700 hover:text-blue-500">الاختبارات</a>
@@ -26,7 +24,6 @@
             <a href="/QuizLand/views/contact" class="text-gray-700 hover:text-blue-500">اتصل بنا</a>
         </div>
 
-        <!-- User Profile Dropdown (Visible when logged in) -->
         <div class="relative">
             <?php
             session_start();
@@ -47,16 +44,15 @@
                 </div>';
             } else {
                 echo '
-                <div class="flex space-x-4">
-                    <a href="/QuizLand/views/auth/signin.php" class="px-4 py-2 text-gray-700 bg-blue-500 hover:bg-blue-600 rounded-md">تسجيل الدخول</a>
-                    <a href="/QuizLand/views/auth/signup.php" class="px-4 py-2 text-gray-700 bg-green-500 hover:bg-green-600 rounded-md">التسجيل</a>
+                <div class="flex">
+                    <a href="/QuizLand/views/auth/signin.php" class="px-4 py-2 text-gray-700 bg-blue-500 hover:bg-blue-600 text-white rounded-md ml-4">تسجيل الدخول</a>
+                    <a href="/QuizLand/views/auth/signup.php" class="px-4 py-2 text-gray-700 bg-green-500 hover:bg-green-600 text-white rounded-md">التسجيل</a>
                 </div>';
             } ?>
         </div>
 
     </div>
 
-    <!-- Mobile Menu (Hidden by default, shown when hamburger is clicked) -->
     <div id="mobile-menu"
         class="md:hidden hidden absolute top-20 left-0 right-0 bg-white shadow-md border border-gray-200 rounded-md w-full">
         <div class="flex flex-col items-center py-4 space-y-4">
@@ -69,13 +65,11 @@
 </header>
 
 <script>
-    // Toggle the dropdown visibility
     function toggleDropdown() {
         const dropdown = document.getElementById('dropdown');
         dropdown.classList.toggle('hidden');
     }
 
-    // Toggle the mobile menu visibility
     function toggleMobileMenu() {
         const mobileMenu = document.getElementById('mobile-menu');
         mobileMenu.classList.toggle('hidden');

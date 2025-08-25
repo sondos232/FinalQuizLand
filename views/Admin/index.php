@@ -20,17 +20,23 @@ $correctAnswersQuery = "SELECT SUM(score) AS total_correct_answers FROM quiz_att
 $correctAnswersResult = $conn->query($correctAnswersQuery);
 $correctAnswersCount = $correctAnswersResult->fetch_assoc()['total_correct_answers'];
 
-$quizzesQuery = "SELECT category, COUNT(*) AS total_quizzes FROM quizzes GROUP BY category";
+$quizzesQuery = "
+    SELECT q.category, COUNT(q.id) AS total_quizzes, 
+           IFNULL(SUM(qa.total_questions), 0) AS total_attempts
+    FROM quizzes q
+    LEFT JOIN quiz_attempts qa ON q.id = qa.quiz_id
+    GROUP BY q.category";
 $quizzesResult = $conn->query($quizzesQuery);
 $quizzesData = [];
 $categories = [];
-$counts = [];
+$quizCounts = [];
+$attemptCounts = [];
 while ($row = $quizzesResult->fetch_assoc()) {
     $categories[] = $row['category'];
-    $counts[] = $row['total_quizzes'];
+    $quizCounts[] = $row['total_quizzes'];
+    $attemptCounts[] = $row['total_attempts'];
 }
 
-// Query to get user activity (number of logins per month)
 $activityQuery = "SELECT MONTH(created_at) AS month, COUNT(*) AS logins FROM users GROUP BY MONTH(created_at)";
 $activityResult = $conn->query($activityQuery);
 $months = [];
@@ -40,17 +46,17 @@ while ($row = $activityResult->fetch_assoc()) {
     $logins[] = $row['logins'];
 }
 
-// Query to get correct vs incorrect answers
-$answersQuery = "SELECT 
-                    SUM(CASE WHEN is_correct = 1 THEN 1 ELSE 0 END) AS correct,
-                    SUM(CASE WHEN is_correct = 0 THEN 1 ELSE 0 END) AS incorrect
-                  FROM answers";
-$answersResult = $conn->query($answersQuery);
-$answersData = $answersResult->fetch_assoc();
+$questionsQuery = "
+    SELECT 
+        COUNT(CASE WHEN a.is_correct = 1 THEN 1 ELSE NULL END) AS correct_answers,
+        COUNT(CASE WHEN a.is_correct = 0 THEN 1 ELSE NULL END) AS incorrect_answers
+    FROM student_answers sa
+    JOIN answers a ON sa.selected_answer = a.id";
+$questionsResult = $conn->query($questionsQuery);
+$questionsData = $questionsResult->fetch_assoc();
 
-$correctAnswers = $answersData['correct'];
-$incorrectAnswers = $answersData['incorrect'];
-
+$correctAnswers = $questionsData['correct_answers'];
+$incorrectAnswers = $questionsData['incorrect_answers'];
 ?>
 
 <!DOCTYPE html>
@@ -60,7 +66,6 @@ $incorrectAnswers = $answersData['incorrect'];
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>لوحة تحكم المدير</title>
-    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -71,29 +76,9 @@ $incorrectAnswers = $answersData['incorrect'];
     <div class="flex">
         <?php include 'sidebar.php'; ?>
 
-        <!-- Main Content Area -->
-        <div class="flex-1">
-            <!-- Top Bar -->
-            <div class="bg-blue-700 shadow-md flex items-center justify-between px-6 py-4">
-                <div class="flex items-center">
-                    <button class="text-white md:hidden ml-4" id="hamburger-btn">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M4 6h16M4 12h16M4 18h16"></path>
-                        </svg>
-                    </button>
-                    <span class="text-xl font-semibold text-white">لوحة تحكم المدير</span>
-                </div>
-                <div class="flex items-center space-x-4">
-                    <div class="relative">
-                        <a href="../auth/logout.php" class="px-4 py-2 bg-indigo-600 text-white rounded-md">تسجيل الخروج</a>
-                    </div>
-                </div>
-            </div>
+        <div class="flex-1 md:mr-64">
+            <?php include 'topbar.php'; ?>
 
-
-            <!-- Dashboard Content -->
             <div class="p-6">
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     <div class="bg-white p-6 rounded-lg shadow-lg border-l-4 border-indigo-500">
@@ -101,13 +86,11 @@ $incorrectAnswers = $answersData['incorrect'];
                         <p class="text-2xl font-bold text-gray-900 mt-4"><?= $quizzesCount ?></p>
                     </div>
 
-                    <!-- Stats Card 2 -->
                     <div class="bg-white p-6 rounded-lg shadow-lg border-l-4 border-indigo-500">
                         <h3 class="text-lg font-semibold text-gray-700">عدد المستخدمين</h3>
                         <p class="text-2xl font-bold text-gray-900 mt-4"><?= $usersCount ?></p>
                     </div>
 
-                    <!-- Stats Card 3 -->
                     <div class="bg-white p-6 rounded-lg shadow-lg border-l-4 border-indigo-500">
                         <h3 class="text-lg font-semibold text-gray-700">عدد الإجابات الصحيحة</h3>
                         <p class="text-2xl font-bold text-gray-900 mt-4">
@@ -118,19 +101,16 @@ $incorrectAnswers = $answersData['incorrect'];
 
                 <div class="container mx-auto p-6">
                     <div class="flex flex-wrap gap-6 justify-between">
-                        <!-- Bar Chart: Number of Quizzes per Category -->
                         <div class="w-full lg:w-[30%]">
                             <h3 class="text-xl font-semibold mb-6">إجمالي الاختبارات حسب الفئة</h3>
                             <canvas id="barChart"></canvas>
                         </div>
 
-                        <!-- Line Chart: User Activity (Logins per Month) -->
                         <div class="w-full lg:w-[30%]">
                             <h3 class="text-xl font-semibold my-6">النشاط الشهري للمستخدمين</h3>
                             <canvas id="lineChart"></canvas>
                         </div>
 
-                        <!-- Pie Chart: Correct vs Incorrect Answers -->
                         <div class="w-full lg:w-[30%]">
                             <h3 class="text-xl font-semibold my-6">الإجابات الصحيحة مقابل الإجابات الخاطئة</h3>
                             <canvas id="pieChart"></canvas>
@@ -144,23 +124,27 @@ $incorrectAnswers = $answersData['incorrect'];
 
 
     <script>
-        document.getElementById('hamburger-btn').addEventListener('click', function () {
-            const sidebar = document.getElementById('sidebar');
-            sidebar.classList.toggle('hidden'); // Toggle the hidden class on the sidebar
-        });
-        
         const barCtx = document.getElementById('barChart').getContext('2d');
         const barChart = new Chart(barCtx, {
             type: 'bar',
             data: {
                 labels: <?php echo json_encode($categories); ?>,
-                datasets: [{
-                    label: 'عدد الاختبارات',
-                    data: <?php echo json_encode($counts); ?>,
-                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
-                    borderColor: 'rgba(54, 162, 235, 1)',
-                    borderWidth: 1
-                }]
+                datasets: [
+                    {
+                        label: 'عدد الاختبارات',
+                        data: <?php echo json_encode($quizCounts); ?>,
+                        backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                        borderColor: 'rgba(54, 162, 235, 1)',
+                        borderWidth: 1
+                    },
+                    {
+                        label: 'عدد المحاولات',
+                        data: <?php echo json_encode($attemptCounts); ?>,
+                        backgroundColor: 'rgba(255, 159, 64, 0.2)',
+                        borderColor: 'rgba(255, 159, 64, 1)',
+                        borderWidth: 1
+                    }
+                ]
             },
             options: {
                 scales: {
@@ -171,7 +155,7 @@ $incorrectAnswers = $answersData['incorrect'];
             }
         });
 
-        // Line Chart: User Activity (Logins per Month)
+
         const lineCtx = document.getElementById('lineChart').getContext('2d');
         const lineChart = new Chart(lineCtx, {
             type: 'line',
@@ -187,7 +171,6 @@ $incorrectAnswers = $answersData['incorrect'];
             }
         });
 
-        // Pie Chart: Correct vs Incorrect Answers
         const pieCtx = document.getElementById('pieChart').getContext('2d');
         const pieChart = new Chart(pieCtx, {
             type: 'pie',
@@ -197,6 +180,21 @@ $incorrectAnswers = $answersData['incorrect'];
                     data: [<?php echo $correctAnswers; ?>, <?php echo $incorrectAnswers; ?>],
                     backgroundColor: ['rgba(75, 192, 192, 0.6)', 'rgba(255, 99, 132, 0.6)']
                 }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function (tooltipItem) {
+                                return tooltipItem.label + ': ' + tooltipItem.raw;
+                            }
+                        }
+                    }
+                }
             }
         });
     </script>

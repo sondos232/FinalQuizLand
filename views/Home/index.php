@@ -171,7 +171,6 @@ while ($row = $result->fetch_assoc()) {
             <h2 class="text-midnight_text text-5xl font-semibold">تعرف على مرشدينا.</h2>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-10">
-                <!-- Mentor 1 -->
                 <div class="m-3 py-14 text-center">
                     <div class="relative">
                         <img src="../../assets/images/mentor/user1.png" alt="صورة المستخدم" width="306"
@@ -193,7 +192,6 @@ while ($row = $result->fetch_assoc()) {
                     </div>
                 </div>
 
-                <!-- Mentor 2 -->
                 <div class="m-3 py-14 text-center">
                     <div class="relative">
                         <img src="../../assets/images/mentor/user2.png" alt="صورة المستخدم" width="306"
@@ -215,7 +213,6 @@ while ($row = $result->fetch_assoc()) {
                     </div>
                 </div>
 
-                <!-- Mentor 3 -->
                 <div class="m-3 py-14 text-center">
                     <div class="relative">
                         <img src="../../assets/images/mentor/user3.png" alt="صورة المستخدم" width="306"
