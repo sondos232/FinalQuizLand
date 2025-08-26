@@ -7,7 +7,7 @@ if (!isset($_SESSION['user']) || $_SESSION['user']['role'] != 'admin') {
     exit();
 }
 
-$query = "SELECT id, title, category, created_at FROM quizzes";
+$query = "SELECT id, title, category, created_at, image FROM quizzes";
 $result = $conn->query($query);
 ?>
 
@@ -36,7 +36,6 @@ $result = $conn->query($query);
                     </div>
 
                     <div class="mt-6">
-                        <!-- جدول للأجهزة المتوسطة والكبيرة -->
                         <div class="overflow-x-auto hidden lg:block">
                             <table class="min-w-full border border-gray-200 rounded-lg overflow-hidden shadow-sm">
                                 <thead class="bg-gray-100 text-gray-700 text-sm uppercase">
@@ -45,6 +44,7 @@ $result = $conn->query($query);
                                         <th class="py-3 px-4 text-right border-b">العنوان</th>
                                         <th class="py-3 px-4 text-right border-b">الفئة</th>
                                         <th class="py-3 px-4 text-right border-b">التاريخ</th>
+                                        <th class="py-3 px-4 text-right border-b">الصورة</th>
                                         <th class="py-3 px-4 text-right border-b">الإجراءات</th>
                                     </tr>
                                 </thead>
@@ -59,10 +59,12 @@ $result = $conn->query($query);
                                                 </span>
                                             </td>
                                             <td class="py-3 px-4 whitespace-nowrap">
-                                                <?= htmlspecialchars($row['category']) ?>
-                                            </td>
+                                                <?= htmlspecialchars($row['category']) ?></td>
                                             <td class="py-3 px-4 whitespace-nowrap">
-                                                <?= date("Y-m-d", strtotime($row['created_at'])) ?>
+                                                <?= date("Y-m-d", strtotime($row['created_at'])) ?></td>
+                                            <td class="py-3 px-4">
+                                                    <img src="../../../<?= $row['image'] ?>" alt="صورة الاختبار"
+                                                        class="w-16 h-16 object-cover rounded-md">
                                             </td>
                                             <td class="py-3 px-4">
                                                 <div class="flex items-center gap-2">
@@ -83,7 +85,6 @@ $result = $conn->query($query);
                             </table>
                         </div>
 
-                        <!-- كروت للجوال (أصغر من md) -->
                         <div class="space-y-3 lg:hidden">
                             <?php foreach ($result as $row): ?>
                                 <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-4">

@@ -31,7 +31,6 @@ $result = $conn->query($query);
                         <a href="create.php" class="px-4 py-2 bg-blue-600 text-white rounded-md">إضافة مستخدم جديد</a>
                     </div>
                     <div class="mt-6">
-                        <!-- جدول لسطح المكتب والأجهزة الكبيرة -->
                         <div class="overflow-x-auto hidden lg:block">
                             <table class="min-w-full border border-gray-200 rounded-lg overflow-hidden shadow-sm">
                                 <thead class="bg-gray-100 text-gray-700 text-sm uppercase">
@@ -86,7 +85,6 @@ $result = $conn->query($query);
                             </table>
                         </div>
 
-                        <!-- كروت للجوال والأجهزة الصغيرة -->
                         <div class="space-y-3 lg:hidden">
                             <?php foreach ($result as $row): ?>
                                 <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-4">

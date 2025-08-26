@@ -1,6 +1,9 @@
 <?php
 include '../../config/db.php';
-session_start();
+
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
 
 header("Cache-Control: no-cache, no-store, must-revalidate");
 header("Pragma: no-cache");
@@ -42,6 +45,9 @@ $questions = [];
 while ($row = $questionsResult->fetch_assoc()) {
     $questions[] = $row;
 }
+
+$passing_score = 70; 
+$success = round(($score / $totalQuestions) * 100) >= $passing_score;
 ?>
 
 <!DOCTYPE html>
@@ -52,56 +58,108 @@ while ($row = $questionsResult->fetch_assoc()) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>نتائج الاختبار: <?= $quiz['title'] ?></title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .card {
+            background-color: #ffffff;
+            padding: 2rem;
+            border-radius: 1.25rem;
+            box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-section {
+            background: linear-gradient(135deg, #6e7fda, #4b6a8e);
+            color: white;
+        }
+
+        .header-section h1 {
+            font-size: 2.5rem;
+            font-weight: bold;
+        }
+
+        .header-section p {
+            font-size: 1.25rem;
+        }
+
+        .result-header {
+            background-color: #4b6a8e;
+            color: white;
+            padding: 15px 0;
+            border-radius: 0.5rem;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
+        }
+
+        .btn-primary {
+            background-color: #3182ce;
+            color: white;
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+            border-radius: 0.75rem;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background-color: #2b6cb0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .answer-feedback {
+            background-color: #f7fafc;
+            padding: 1rem;
+            border-radius: 0.75rem;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .correct-answer {
+            color: #38a169;
+        }
+
+        .incorrect-answer {
+            color: #e53e3e;
+        }
+    </style>
 </head>
 
-<body class="bg-gray-100 font-sans">
+<body class="bg-gray-50">
 
-    <div class="bg-blue-600 py-4 shadow-md">
-        <div class="container mx-auto px-4 text-center">
-            <span class="text-white text-2xl font-bold">نتائج الاختبار</span>
-        </div>
+    <div class="header-section py-12 text-center">
+        <h1>نتائج الاختبار: <?= $quiz['title'] ?></h1>
+        <p class="mt-4"><?= $quiz['description'] ? $quiz['description'] : 'لا توجد تفاصيل.' ?></p>
     </div>
 
-    <div class="container mx-auto px-6 py-8 mt-10">
-        <div class="bg-white p-6 rounded-lg shadow-lg max-w-4xl mx-auto">
-            <h2 class="text-3xl font-bold text-gray-800"><?= $quiz['title'] ?></h2>
-            <p class="text-lg text-gray-600 mt-2"><?= $quiz['description'] ? $quiz['description'] : 'لا توجد تفاصيل' ?>
+    <div class="container max-w-screen-lg mx-auto py-24">
+        <div class="card">
+            <h3 class="text-2xl font-semibold text-gray-800">النتيجة</h3>
+            <p class="text-3xl font-bold <?= $success ? 'text-green-600' : 'text-red-600' ?> mt-4">
+                <?= $success ? "لقد أجبت على $score من أصل $totalQuestions سؤال بشكل صحيح." : "فشلت في اجتياز الاختبار." ?>
             </p>
+            <p class="text-lg text-gray-600 mt-2">نسبة النجاح: <?= round(($score / $totalQuestions) * 100, 2) ?>%</p>
+        </div>
 
-            <div class="mt-8">
-                <h3 class="text-2xl font-semibold text-gray-700">النتيجة</h3>
-                <p class="text-3xl font-bold text-green-500 mt-4">لقد أجبت على <?= $score ?> من أصل
-                    <?= $totalQuestions ?> سؤال بشكل صحيح.
-                </p>
-                <p class="text-lg text-gray-600 mt-2">نسبة النجاح: <?= round(($score / $totalQuestions) * 100, 2) ?>%
-                </p>
-            </div>
-
-            <div class="mt-8">
-                <h3 class="text-2xl font-semibold text-gray-700">الأسئلة</h3>
-                <div class="mt-4">
-                    <?php foreach ($questions as $index => $question): ?>
-                        <div class="border-b pb-4 mb-4">
-                            <p class="text-lg font-semibold"><?= ($index + 1) . ". " . $question['question_text'] ?></p>
-
-                            <div class="mt-2">
-                                <p class="text-sm text-gray-600">إجابتك:</p>
-                                <p class="font-semibold <?= $question['is_correct'] ? 'text-green-600' : 'text-red-600' ?>">
-                                    <?= $question['selected_answer_text'] ?>
-                                </p>
-                                <p class="text-sm text-gray-500 mt-2">الإجابة الصحيحة:</p>
-                                <p class="font-semibold text-green-600"><?= $question['correct_answer_text'] ?></p>
-                            </div>
+        <div class="mt-8 max-w-screen-lg mx-auto">
+            <h3 class="text-2xl font-semibold text-gray-700">الأسئلة</h3>
+            <div class="mt-4 space-y-6">
+                <?php foreach ($questions as $index => $question): ?>
+                    <div class="answer-feedback">
+                        <p class="text-lg font-semibold"><?= ($index + 1) . ". " . $question['question_text'] ?></p>
+                        <div class="mt-2">
+                            <p class="text-sm text-gray-600">إجابتك:</p>
+                            <p class="font-semibold <?= $question['is_correct'] ? 'correct-answer' : 'incorrect-answer' ?>">
+                                <?= $question['selected_answer_text'] ?>
+                            </p>
+                            <p class="text-sm text-gray-500 mt-2">الإجابة الصحيحة:</p>
+                            <p class="font-semibold text-green-600"><?= $question['correct_answer_text'] ?></p>
                         </div>
-                    <?php endforeach; ?>
-                </div>
+                    </div>
+                <?php endforeach; ?>
             </div>
+        </div>
 
-            <div class="mt-8 text-center">
-                <a href="./index.php"
-                    class="bg-blue-600 text-white py-3 px-8 rounded-full text-lg font-medium hover:bg-blue-700 transition duration-300">العودة
-                    إلى الدورات</a>
-            </div>
+        <div class="mt-8 text-center">
+            <a href="./index.php" class="btn-primary">العودة إلى الدورات</a>
         </div>
     </div>
 

@@ -1,15 +1,12 @@
 <?php
-// /views/admin/users/create.php
 include '../../../config/db.php';
 session_start();
 
-// 1) AuthZ: only admins
 if (!isset($_SESSION['user']) || $_SESSION['user']['role'] !== 'admin') {
     header('Location: ../auth/signin.php');
     exit();
 }
 
-// 2) CSRF token
 if (empty($_SESSION['csrf'])) {
     $_SESSION['csrf'] = bin2hex(random_bytes(32));
 }
@@ -19,18 +16,16 @@ $errors = [];
 $success = false;
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // CSRF check
     if (!isset($_POST['csrf']) || !hash_equals($_SESSION['csrf'], $_POST['csrf'])) {
         $errors[] = 'Security token mismatch.';
     } else {
         $username = trim($_POST['username'] ?? '');
         $email = trim($_POST['email'] ?? '');
-        $role = $_POST['role'] ?? 'student'; // enum('admin','student')
-        $is_active = isset($_POST['is_active']) ? 1 : 0; // checkbox
+        $role = $_POST['role'] ?? 'student';
+        $is_active = isset($_POST['is_active']) ? 1 : 0;
         $password_raw = $_POST['password'] ?? '';
         $password_confirm = $_POST['password_confirm'] ?? '';
 
-        // Validation
         if ($username === '')
             $errors[] = 'Username is required.';
         if ($email === '' || !filter_var($email, FILTER_VALIDATE_EMAIL))
@@ -44,9 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($password_raw !== $password_confirm)
             $errors[] = 'Passwords do not match.';
 
-        // Uniqueness checks
         if (!$errors) {
-            // username
             $stmt = $conn->prepare("SELECT id FROM users WHERE username = ?");
             $stmt->bind_param("s", $username);
             $stmt->execute();
@@ -55,7 +48,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $errors[] = 'Username already exists.';
             $stmt->close();
 
-            // email
             if (!$errors) {
                 $stmt = $conn->prepare("SELECT id FROM users WHERE email = ?");
                 $stmt->bind_param("s", $email);
@@ -67,14 +59,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
         }
 
-        // Insert
         if (!$errors) {
             $password_hash = password_hash($password_raw, PASSWORD_BCRYPT);
             $stmt = $conn->prepare("INSERT INTO users (username, email, password, role, is_active) VALUES (?, ?, ?, ?, ?)");
             $stmt->bind_param("ssssi", $username, $email, $password_hash, $role, $is_active);
             if ($stmt->execute()) {
                 $success = true;
-                // redirect to list after brief success (or immediate)
                 header("Location: index.php?created=1");
                 exit();
             } else {
@@ -99,7 +89,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <div class="flex">
         <?php include '../sidebar.php'; ?>
 
-        <div class="flex-1 p-6">
+        <div class="flex-1 p-6 md:mr-64">
             <div class="max-w-2xl mx-auto bg-white p-6 rounded-lg shadow-md">
                 <div class="flex items-center justify-between mb-4">
                     <h2 class="text-2xl font-semibold text-gray-800">إضافة مستخدم جديد</h2>

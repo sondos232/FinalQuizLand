@@ -128,6 +128,15 @@ $creator = $creatorResult->fetch_assoc()['username'];
             <p class="text-lg text-gray-700 mt-4"><?= $quiz['description'] ? $quiz['description'] : 'لا توجد تفاصيل' ?>
             </p>
 
+            <?php
+            if (isset($_GET['message']) && $_GET['message'] == 'no_enough_questions') {
+                echo "
+    <div class='bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4 mb-6' role='alert'>
+        <p class='font-medium'>لا توجد أسئلة كافية في هذا الاختبار، يرجى اختيار اختبار آخر.</p>
+    </div>";
+            }
+            ?>
+
             <div class="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 <div class="info-card">
                     <h3>عدد الأسئلة</h3>

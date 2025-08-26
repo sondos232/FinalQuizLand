@@ -7,12 +7,11 @@ if (!isset($_SESSION['user']) || $_SESSION['user']['role'] != 'admin') {
     exit();
 }
 
-$quizId = $_GET['id']; // Get the quiz ID from the URL
+$quizId = $_GET['id'];
 
-// Delete quiz from the database
 $query = "DELETE FROM quizzes WHERE id = '$quizId'";
 if ($conn->query($query)) {
-    header('Location: index.php'); // Redirect back to the quizzes list
+    header('Location: index.php');
     exit();
 } else {
     echo "حدث خطأ أثناء حذف الاختبار!";

@@ -1,34 +1,28 @@
 <?php
-// /views/admin/users/edit.php
 include '../../../config/db.php';
 session_start();
 
-// 1) AuthZ: only admins
 if (!isset($_SESSION['user']) || $_SESSION['user']['role'] !== 'admin') {
     header('Location: ../auth/signin.php');
     exit();
 }
 
-// 2) Basic helpers
 function redirect_with($params = []) {
     $query = http_build_query($params);
     header("Location: index.php" . ($query ? "?$query" : ""));
     exit();
 }
 
-// 3) CSRF token
 if (empty($_SESSION['csrf'])) {
     $_SESSION['csrf'] = bin2hex(random_bytes(32));
 }
 $csrf = $_SESSION['csrf'];
 
-// 4) Validate ID
 if (!isset($_GET['id']) || !ctype_digit($_GET['id'])) {
     redirect_with(['error' => 'invalid_id']);
 }
 $user_id = (int) $_GET['id'];
 
-// 5) Fetch current user row (username بدل name) + is_active
 $stmt = $conn->prepare("SELECT id, username, email, role, is_active, created_at FROM users WHERE id = ?");
 $stmt->bind_param("i", $user_id);
 $stmt->execute();
@@ -40,30 +34,26 @@ if (!$user) {
     redirect_with(['error' => 'not_found']);
 }
 
-// 6) Handle POST (update)
 $errors = [];
 $success = false;
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // CSRF check
     if (!isset($_POST['csrf']) || !hash_equals($_SESSION['csrf'], $_POST['csrf'])) {
         $errors[] = 'Security token mismatch.';
     } else {
         $username        = trim($_POST['username'] ?? '');
         $email           = trim($_POST['email'] ?? '');
-        $role            = $_POST['role'] ?? $user['role'];                 // admin / student
-        $is_active       = isset($_POST['is_active']) ? 1 : 0;              // checkbox
+        $role            = $_POST['role'] ?? $user['role'];
+        $is_active       = isset($_POST['is_active']) ? 1 : 0;
         $password_raw    = $_POST['password'] ?? '';
         $password_confirm= $_POST['password_confirm'] ?? '';
 
-        // Validation
         if ($username === '') $errors[] = 'Username is required.';
         if ($email === '' || !filter_var($email, FILTER_VALIDATE_EMAIL)) $errors[] = 'Valid email is required.';
         if (!in_array($role, ['admin','student'], true)) $errors[] = 'Invalid role.';
         if ($password_raw !== '' && $password_raw !== $password_confirm) $errors[] = 'Passwords do not match.';
         if (strlen($password_raw) > 0 && strlen($password_raw) < 6) $errors[] = 'Password must be at least 6 characters.';
 
-        // Ensure username unique (excluding this user)
         if (!$errors) {
             $stmt = $conn->prepare("SELECT id FROM users WHERE username = ? AND id <> ?");
             $stmt->bind_param("si", $username, $user_id);
@@ -73,7 +63,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $stmt->close();
         }
 
-        // Ensure email unique (excluding this user)
         if (!$errors) {
             $stmt = $conn->prepare("SELECT id FROM users WHERE email = ? AND id <> ?");
             $stmt->bind_param("si", $email, $user_id);
@@ -83,7 +72,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $stmt->close();
         }
 
-        // Update
         if (!$errors) {
             if ($password_raw !== '') {
                 $password_hash = password_hash($password_raw, PASSWORD_BCRYPT);
@@ -100,7 +88,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             if ($stmt->execute()) {
                 $success = true;
-                // refresh $user to reflect changes
                 $user['username']  = $username;
                 $user['email']     = $email;
                 $user['role']      = $role;
@@ -125,7 +112,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <div class="flex">
     <?php include '../sidebar.php'; ?>
 
-    <div class="flex-1 p-6">
+    <div class="flex-1 p-6 md:mr-64">
         <div class="max-w-2xl mx-auto bg-white p-6 rounded-lg shadow-md">
             <div class="flex items-center justify-between mb-4">
                 <h1 class="text-2xl font-semibold text-gray-800">تعديل المستخدم</h1>

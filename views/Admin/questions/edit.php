@@ -6,20 +6,17 @@ if (!isset($_SESSION['user']) || $_SESSION['user']['role'] !== 'admin') {
     exit();
 }
 
-// CSRF token
 if (empty($_SESSION['csrf'])) {
     $_SESSION['csrf'] = bin2hex(random_bytes(32));
 }
 $csrf = $_SESSION['csrf'];
 
-// جلب السؤال الحالي
 if (!isset($_GET['id']) || !ctype_digit($_GET['id'])) {
     header('Location: index.php?error=invalid_id');
     exit();
 }
 $question_id = (int) $_GET['id'];
 
-// جلب السؤال والإجابات
 $sql = "SELECT q.id, q.quiz_id, q.question_text, q.question_type, q.difficulty, qz.title AS quiz_title
         FROM questions q
         JOIN quizzes qz ON q.quiz_id = qz.id
@@ -36,7 +33,6 @@ if (!$question) {
 
 $quizzes = $conn->query("SELECT id, title FROM quizzes ORDER BY title ASC")->fetch_all(MYSQLI_ASSOC);
 
-// جلب الإجابات
 $sql_answers = "SELECT id, answer_text, is_correct FROM answers WHERE question_id = ?";
 $stmt_answers = $conn->prepare($sql_answers);
 $stmt_answers->bind_param("i", $question_id);
@@ -67,7 +63,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $errors[] = 'صعوبة غير صالحة.';
 
         if (!$errors) {
-            // تحديث السؤال
             $stmt = $conn->prepare("UPDATE questions SET quiz_id = ?, question_text = ?, question_type = ?, difficulty = ? WHERE id = ?");
             $stmt->bind_param("isssi", $quiz_id, $question_text, $question_type, $difficulty, $question_id);
             $stmt->execute();
@@ -82,7 +77,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $existing_answers[] = $answer;
             }
 
-            // تحديث الإجابات بناءً على نوع السؤال
             if ($question_type === 'multiple_choice') {
                 $answers = $_POST['answers'] ?? [];
                 $correct = $_POST['correct'] ?? null;
@@ -143,7 +137,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body class="bg-gray-100">
     <div class="flex">
         <?php include '../sidebar.php'; ?>
-        <div class="flex-1 p-6">
+        <div class="flex-1 p-6 md:mr-64">
             <div class="max-w-3xl mx-auto bg-white p-6 rounded-lg shadow-md">
                 <div class="flex items-center justify-between mb-4">
                     <h2 class="text-2xl font-semibold text-gray-800">تعديل السؤال</h2>
@@ -205,7 +199,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         </div>
                     </div>
 
-                    <!-- اختيار متعدد -->
                     <div id="mc_section"
                         class="<?= ($question['question_type'] === 'multiple_choice') ? '' : 'hidden' ?>">
                         <p class="text-sm text-gray-600 mb-2">أدخل 4 إجابات وحدد الإجابة الصحيحة</p>
@@ -218,7 +211,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <?php endfor; ?>
                     </div>
 
-                    <!-- صح/خطأ -->
                     <div id="tf_section" class="<?= ($question['question_type'] === 'true_false') ? '' : 'hidden' ?>">
                         <p class="text-sm text-gray-600 mb-2">اختر الإجابة الصحيحة:</p>
                         <div class="flex items-center gap-6">
@@ -233,7 +225,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         </div>
                     </div>
 
-                    <!-- إجابة قصيرة -->
                     <div id="short_section"
                         class="<?= ($question['question_type'] === 'short_answer') ? '' : 'hidden' ?>">
                         <label class="block mb-1 text-sm text-gray-700">الإجابة المتوقعة</label>
@@ -252,13 +243,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </div>
 
     <script>
-        // إظهار/إخفاء الأقسام حسب النوع
         const typeSel = document.getElementById('question_type');
         const mc = document.getElementById('mc_section');
         const tf = document.getElementById('tf_section');
         const sh = document.getElementById('short_section');
 
-        // تابع لتغيير الأقسام بناءً على الاختيار
         const toggleSections = () => {
             mc.classList.add('hidden');
             tf.classList.add('hidden');
@@ -269,10 +258,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if (typeSel.value === 'short_answer') sh.classList.remove('hidden');
         };
 
-        // تفعيل التبديل عند تغيير الاختيار
         typeSel.addEventListener('change', toggleSections);
 
-        // تفعيل التبديل بناءً على نوع السؤال عند التحميل
         document.addEventListener('DOMContentLoaded', () => {
             toggleSections();
         });

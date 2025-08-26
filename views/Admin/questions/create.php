@@ -6,7 +6,6 @@ if (!isset($_SESSION['user']) || $_SESSION['user']['role'] !== 'admin') {
     exit();
 }
 
-// CSRF
 if (empty($_SESSION['csrf']))
     $_SESSION['csrf'] = bin2hex(random_bytes(32));
 $csrf = $_SESSION['csrf'];
@@ -33,18 +32,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $errors[] = 'صعوبة غير صالحة.';
 
         if (!$errors) {
-            // أدخل السؤال
             $stmt = $conn->prepare("INSERT INTO questions (quiz_id, question_text, question_type, difficulty) VALUES (?, ?, ?, ?)");
             $stmt->bind_param("isss", $quiz_id, $question_text, $question_type, $difficulty);
             if ($stmt->execute()) {
                 $question_id = $stmt->insert_id;
                 $stmt->close();
 
-                // أدخل الإجابات بحسب النوع
                 if ($question_type === 'multiple_choice') {
-                    $answers = $_POST['answers'] ?? [];           // array of strings
-                    $correct = $_POST['correct'] ?? null;         // index 0..3
-                    // تحقق: 4 إجابات و مؤشر صحيح
+                    $answers = $_POST['answers'] ?? []; 
+                    $correct = $_POST['correct'] ?? null;
                     if (count($answers) !== 4)
                         $errors[] = 'أدخل 4 إجابات.';
                     if ($correct === null || !in_array((int) $correct, [0, 1, 2, 3], true))
@@ -77,7 +73,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     header("Location: index.php?created=1");
                     exit();
                 } else {
-                    // إذا حدثت أخطاء بعد إنشاء السؤال، يُمكنك حذف السؤال لتفادي孤 orphan
                     $conn->query("DELETE FROM questions WHERE id={$question_id}");
                 }
             } else {
@@ -160,7 +155,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     </div>
                     <p class="text-xs text-red-600">متاح إضافة اسئلة من نوع اختيار متعدد فقط!</p>
 
-                    <!-- اختيار متعدد -->
                     <div id="mc_section"
                         class="<?= (($_POST['question_type'] ?? 'multiple_choice') === 'multiple_choice') ? '' : 'hidden' ?>">
                         <p class="text-sm text-gray-600 mb-2">أدخل 4 إجابات وحدد الصحيحة</p>
@@ -174,7 +168,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <?php endfor; ?>
                     </div>
 
-                    <!-- صح/خطأ -->
                     <div id="tf_section" class="<?= (($_POST['question_type'] ?? '') === 'true_false') ? '' : 'hidden' ?>">
                         <p class="text-sm text-gray-600 mb-2">اختر الإجابة الصحيحة:</p>
                         <div class="flex items-center gap-6">
@@ -189,7 +182,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         </div>
                     </div>
 
-                    <!-- إجابة قصيرة -->
                     <div id="short_section"
                         class="<?= (($_POST['question_type'] ?? '') === 'short_answer') ? '' : 'hidden' ?>">
                         <label class="block mb-1 text-sm text-gray-700">الإجابة المتوقعة</label>
@@ -207,7 +199,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </div>
 
     <script>
-        // إظهار/إخفاء الأقسام حسب النوع
         const typeSel = document.getElementById('question_type');
         const mc = document.getElementById('mc_section');
         const tf = document.getElementById('tf_section');

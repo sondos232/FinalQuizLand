@@ -7,21 +7,44 @@ if (!isset($_SESSION['user']) || $_SESSION['user']['role'] != 'admin') {
     exit();
 }
 
-// Handle form submission for creating a new quiz
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $title = $_POST['title'];
     $category = $_POST['category'];
-    $description = $_POST['description'];
     $created_by = $_SESSION['user']['id'];
 
-    // Insert quiz into the database
-    $query = "INSERT INTO quizzes (title, category, description, created_by) VALUES ('$title', '$category', '$description', '$created_by')";
-    if ($conn->query($query)) {
-        header('Location: index.php'); // Redirect back to the quizzes list
-        exit();
-    } else {
-        echo "حدث خطأ أثناء إضافة الاختبار!";
+    $image = NULL;
+    if (isset($_FILES['quiz_image']) && $_FILES['quiz_image']['error'] == 0) {
+        $upload_dir = '../../../assets/images/quizzes/';
+
+        if (!is_dir($upload_dir)) {
+            mkdir($upload_dir, 0777, true);
+        }
+
+        $image_name = uniqid('quiz_', true) . '.' . pathinfo($_FILES['quiz_image']['name'], PATHINFO_EXTENSION);
+        $target_file = $upload_dir . $image_name;
+
+        $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
+        if (in_array($imageFileType, ['jpg', 'jpeg', 'png', 'gif'])) {
+            if (move_uploaded_file($_FILES['quiz_image']['tmp_name'], $target_file)) {
+                $image = 'assets/images/quizzes/' . $image_name;
+            } else {
+                echo "Error uploading file.";
+                exit();
+            }
+        } else {
+            echo "Invalid file type.";
+            exit();
+        }
     }
+
+    $query = "INSERT INTO quizzes (title, category, created_by, image) VALUES (?, ?, ?, ?)";
+    $stmt = $conn->prepare($query);
+    $stmt->bind_param("ssis", $title, $category, $created_by, $image);
+    $stmt->execute();
+    $stmt->close();
+
+    header('Location: index.php');
+    exit();
 }
 ?>
 
@@ -39,8 +62,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     <div class="flex">
         <?php include '../sidebar.php'; ?>
-        <!-- Main Content -->
-        <div class="flex-1 p-6">
+        <div class="flex-1 p-6 md:mr-64">
             <div class="bg-white shadow-md p-6 rounded-lg">
                 <h2 class="text-2xl font-semibold text-gray-800">إضافة اختبار جديد</h2>
 
@@ -60,6 +82,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <label for="description" class="block text-gray-700">الوصف</label>
                         <textarea name="description" id="description" rows="5"
                             class="w-full px-4 py-2 border rounded-md" required></textarea>
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="quiz_image" class="block text-lg font-medium text-gray-700">صورة الاختبار</label>
+                        <input type="file" name="quiz_image" id="quiz_image"
+                            class="w-full p-3 mt-2 border border-gray-300 rounded-md" accept="image/*">
                     </div>
 
                     <div class="mt-6 flex gap-3">

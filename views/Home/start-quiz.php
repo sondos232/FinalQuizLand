@@ -11,7 +11,7 @@ if (!isset($_SESSION['user'])) {
     exit();
 }
 if (isset($_SESSION['quiz_completed']) && $_SESSION['quiz_completed'] === true) {
-    header('Location: ./index.php'); 
+    header('Location: ./index.php');
     exit();
 }
 
@@ -34,6 +34,12 @@ $questionsResult = $conn->query($questionsQuery);
 $questions = [];
 while ($row = $questionsResult->fetch_assoc()) {
     $questions[] = $row;
+}
+
+if (count($questions) < 10) {
+    echo "<script>sessionStorage.removeItem('quiz_started');</script>";
+    header('Location: ./quiz-details.php?quiz_id=' . $quiz_id . '&message=no_enough_questions');
+    exit();
 }
 
 $_SESSION['quiz_questions'] = $questions;

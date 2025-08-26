@@ -10,16 +10,13 @@ if (!isset($_SESSION['user']) || $_SESSION['user']['role'] != 'admin') {
 $quiz_id = isset($_GET['quiz_id']) && ctype_digit($_GET['quiz_id']) ? (int) $_GET['quiz_id'] : null;
 $search = isset($_GET['search']) ? trim($_GET['search']) : '';
 
-// اختبارات للقائمة
 $quizzes = $conn->query("SELECT id, title FROM quizzes ORDER BY title ASC")->fetch_all(MYSQLI_ASSOC);
 
-// جلب الأسئلة مع دعم البحث
 $sql = "SELECT q.id, q.question_text, q.question_type, q.difficulty, q.created_at,
                qz.title AS quiz_title, qz.id AS quiz_id
         FROM questions q
         JOIN quizzes qz ON q.quiz_id = qz.id";
 
-// إضافة البحث
 $params = [];
 if ($search) {
     $sql .= " WHERE q.question_text LIKE ? OR qz.title LIKE ? OR q.difficulty LIKE ?";
@@ -68,7 +65,6 @@ $questions = $res->fetch_all(MYSQLI_ASSOC);
                         </div>
                     </div>
 
-                    <!-- فلترة حسب الاختبار + حقل بحث -->
                     <form class="mt-4 flex items-center gap-2 flex-wrap" method="get">
                         <input type="text" name="search" value="<?= htmlspecialchars($search) ?>"
                             placeholder="بحث عن سؤال" class="border rounded-md p-2 bg-white ml-6">
@@ -88,11 +84,9 @@ $questions = $res->fetch_all(MYSQLI_ASSOC);
                         <?php endif; ?>
                     </form>
 
-                    <!-- عرض متجاوب -->
                     <?php if (count($questions) === 0): ?>
                         <p class="mt-6 text-gray-600">لا توجد أسئلة.</p>
                     <?php else: ?>
-                        <!-- جدول لأجهزة md وأكبر -->
                         <div class="mt-6 overflow-x-auto hidden lg:block">
                             <table class="border border-gray-200 rounded-lg shadow-sm" style="width: 100% !important;">
                                 <thead class="bg-gray-100 text-gray-700 text-sm uppercase">
@@ -148,7 +142,6 @@ $questions = $res->fetch_all(MYSQLI_ASSOC);
                             </table>
                         </div>
 
-                        <!-- كروت للجوال -->
                         <div class="space-y-3 lg:hidden mt-6">
                             <?php foreach ($questions as $row): ?>
                                 <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-4">

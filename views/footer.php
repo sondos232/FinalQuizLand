@@ -61,7 +61,7 @@
                             clip-rule="evenodd" />
                     </svg>
 
-                    <h5 class="text-lg text-black/60">925 شارع فيلبرت، بنسلفانيا 18072</h5>
+                    <h5 class="text-lg text-black/60">شارع صلاح الدين، مدينة غزة، فلسطين</h5>
                 </div>
                 <div class="flex gap-2 mt-10">
                     <svg class="w-[42px] h-[42px] fill-blue-700" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
@@ -69,7 +69,7 @@
                         <path
                             d="M7.978 4a2.553 2.553 0 0 0-1.926.877C4.233 6.7 3.699 8.751 4.153 10.814c.44 1.995 1.778 3.893 3.456 5.572 1.68 1.679 3.577 3.018 5.57 3.459 2.062.456 4.115-.073 5.94-1.885a2.556 2.556 0 0 0 .001-3.861l-1.21-1.21a2.689 2.689 0 0 0-3.802 0l-.617.618a.806.806 0 0 1-1.14 0l-1.854-1.855a.807.807 0 0 1 0-1.14l.618-.62a2.692 2.692 0 0 0 0-3.803l-1.21-1.211A2.555 2.555 0 0 0 7.978 4Z" />
                     </svg>
-                    <h5 class="text-lg text-black/60">+45 3411-4411</h5>
+                    <h5 class="text-lg text-black/60">+970 8 123 4567</h5>
                 </div>
                 <div class="flex gap-2 mt-10">
                     <svg class="w-[42px] h-[42px] fill-blue-700" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
@@ -78,7 +78,7 @@
                             d="M3 6a2 2 0 0 1 2-2h5.532a2 2 0 0 1 1.536.72l1.9 2.28H3V6Zm0 3v10a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V9H3Z"
                             clip-rule="evenodd" />
                     </svg>
-                    <h5 class="text-lg text-black/60">info@gmail.com</h5>
+                    <h5 class="text-lg text-black/60">contact@quizland.com</h5>
                 </div>
             </div>
         </div>

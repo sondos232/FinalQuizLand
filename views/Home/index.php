@@ -1,7 +1,7 @@
 <?php
 include("../../config/db.php");
 
-$query = "SELECT id, title, category, created_at FROM quizzes";
+$query = "SELECT id, title, category, created_at, image FROM quizzes";
 $result = $conn->query($query);
 $quizzes = [];
 
@@ -46,18 +46,22 @@ while ($row = $result->fetch_assoc()) {
                     <h3 class="text-gray-700 text-lg pt-5 lg:pt-0">ابدأ رحلتك في تعلم أشياء جديدة من خلال اختباراتنا
                         المتنوعة في جميع المجالات.</h3>
                     <div class="relative rounded-full pt-5 lg:pt-0">
-                        <input type="email" name="q"
-                            class="py-6 lg:py-8 pl-8 pr-20 text-lg w-full text-black rounded-full focus:outline-none shadow-xl  shadow-purple-100/90"
-                            placeholder="ابحث عن اختبارات ثقافة عامة..." autocomplete="off" />
-                        <button class="bg-blue-500 p-5 rounded-full absolute left-2 top-7 lg:top-2">
-                            <svg class="w-[22px] lg:w-[38px] h-[22px] lg:h-[38px] text-gray-800 dark:text-white"
-                                aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
-                                viewBox="0 0 24 24">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-width="2.3"
-                                    d="m21 21-3.5-3.5M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z" />
-                            </svg>
-                        </button>
+                        <form method="GET" action="quizzes.php"> <!-- Changed from input to form with GET method -->
+                            <input type="text" name="search" class="py-6 lg:py-8 pl-8 pr-20 text-lg w-full text-black rounded-full focus:outline-none
+                            shadow-xl shadow-purple-100/90" placeholder="ابحث عن اختبارات ثقافة عامة..."
+                                autocomplete="off" />
+
+                            <button type="submit" class="bg-blue-500 p-5 rounded-full absolute left-2 top-7 lg:top-2">
+                                <svg class="w-[22px] lg:w-[38px] h-[22px] lg:h-[38px] text-gray-800 dark:text-white"
+                                    aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                    fill="none" viewBox="0 0 24 24">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-width="2.3"
+                                        d="m21 21-3.5-3.5M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z" />
+                                </svg>
+                            </button>
+                        </form>
                     </div>
+
                     <div class="flex items-center justify-around pt-10 lg:pt-4">
                         <div class="flex gap-2">
                             <img src="../../assets/images/banner/check-circle.svg" alt="check-image" width="30"
@@ -89,7 +93,7 @@ while ($row = $result->fetch_assoc()) {
         <div class="container mx-auto lg:max-w-screen-xl md:max-w-screen-md px-4">
             <div class="sm:flex justify-between items-center mb-20">
                 <h2 class="text-midnight_text text-4xl lg:text-5xl font-semibold mb-5 sm:mb-0">الدورات الشعبية</h2>
-                <a href="/" class="text-primary text-lg font-medium hover:tracking-widest duration-500">استكشاف
+                <a href="./quizzes.php" class="text-primary text-lg font-medium hover:tracking-widest duration-500">استكشاف
                     الدورات&nbsp;&gt;&nbsp;</a>
             </div>
 
@@ -101,8 +105,8 @@ while ($row = $result->fetch_assoc()) {
                                 <div class="course-item shadow-2xl rounded-2xl">
                                     <div class="bg-white m-3 mb-12 px-3 pt-3 pb-12 shadow-course-shadow rounded-2xl h-full">
                                         <div class="relative rounded-3xl">
-                                            <img src="../../assets/images/courses/courseone.png" alt="course-image"
-                                                width="389" height="262" class="m-auto clipPath">
+                                            <img src="../../<?= $quiz['image'] ?>" alt="course-image"
+                                                class="m-auto clipPath w-full h-72">
                                             <div class="absolute right-5 -bottom-2 bg-secondary rounded-full p-6">
                                                 <h3 class="text-white uppercase text-center text-sm font-medium">الأفضل
                                                     مبيعًا
@@ -301,6 +305,15 @@ while ($row = $result->fetch_assoc()) {
                     spaceBetween: 30,
                 },
             },
+        });
+
+        const swiperContainer = document.querySelector('.swiper-container');
+        swiperContainer.addEventListener('mouseenter', () => {
+            swiper.autoplay.stop();
+        });
+
+        swiperContainer.addEventListener('mouseleave', () => {
+            swiper.autoplay.start();
         });
     </script>
 </body>

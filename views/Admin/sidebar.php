@@ -1,4 +1,3 @@
-<!-- Sidebar -->
 <div id="sidebar"
     class="fixed inset-y-0 right-0 w-1/2 max-w-xs bg-blue-900 text-white z-50 transform -translate-x-full transition-transform duration-300 md:translate-x-0 md:fixed md:w-64 md:block hidden">
     <div class="p-6 text-center bg-blue-100">
