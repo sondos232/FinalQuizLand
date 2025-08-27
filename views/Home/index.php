@@ -46,8 +46,8 @@ while ($row = $result->fetch_assoc()) {
                     <h3 class="text-gray-700 text-lg pt-5 lg:pt-0">ابدأ رحلتك في تعلم أشياء جديدة من خلال اختباراتنا
                         المتنوعة في جميع المجالات.</h3>
                     <div class="relative rounded-full pt-5 lg:pt-0">
-                        <form method="GET" action="quizzes.php"> <!-- Changed from input to form with GET method -->
-                            <input type="text" name="search" class="py-6 lg:py-8 pl-8 pr-20 text-lg w-full text-black rounded-full focus:outline-none
+                        <form method="GET" action="quizzes.php">
+                            <input type="text" name="search" class="py-6 lg:py-8 pl-8 pr-8 sm:pr-20 text-lg w-full text-black rounded-full focus:outline-none
                             shadow-xl shadow-purple-100/90" placeholder="ابحث عن اختبارات ثقافة عامة..."
                                 autocomplete="off" />
 

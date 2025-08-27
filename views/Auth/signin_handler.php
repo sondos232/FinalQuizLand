@@ -1,5 +1,7 @@
 <?php
 session_start();
+require_once '../../config/db.php';
+
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
@@ -10,12 +12,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $_SESSION['error'] = 'Please fill all fields.';
         header('Location: signin.php');
         exit();
-    }
-
-    $conn = new mysqli("localhost", "root", "", "QuizLand");
-
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
     }
 
     $stmt = $conn->prepare("SELECT id, username, password,image,role,email FROM users WHERE email = ?");

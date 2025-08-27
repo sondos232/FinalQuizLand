@@ -1,5 +1,5 @@
 <div class="bg-blue-700 shadow-md flex items-center justify-between px-6 py-4">
-    <div class="flex items-center">
+    <div class="flex items-center justify-between">
         <button class="text-white md:hidden ml-4" id="hamburger-btn">
             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                 xmlns="http://www.w3.org/2000/svg">
@@ -7,11 +7,12 @@
                 </path>
             </svg>
         </button>
-        <span class="text-xl font-semibold text-white">لوحة تحكم المدير</span>
+        <span class="md:text-xl font-semibold text-white">لوحة تحكم المدير</span>
     </div>
     <div class="flex items-center space-x-4">
         <div class="relative">
-            <a href="/QuizLand/views/auth/logout.php" class="px-4 py-2 bg-indigo-600 text-white rounded-md">تسجيل
+            <a href="/QuizLand/views/auth/logout.php"
+                class="px-4 py-2 bg-indigo-600 text-white rounded-md ml-6 sm:ml-0">تسجيل
                 الخروج</a>
         </div>
     </div>
